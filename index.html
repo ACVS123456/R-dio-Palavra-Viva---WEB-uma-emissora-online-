@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Rádio Palavra Viva</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+--red:#ff0000;
+--dark:#050505;
+--card:#0c0c0c;
+--line:#262626;
+--text:#ffffff;
+--muted:#aaaaaa;
+}
+
+body{
+background:#050505;
+color:#fff;
+padding:18px;
+padding-bottom:120px;
+overflow-x:hidden;
+}
+
+.container{
+max-width:1600px;
+margin:auto;
+}
+
+/* TOPO */
+.topo{
+display:grid;
+grid-template-columns:1.6fr .8fr .8fr .6fr .8fr;
+gap:14px;
+margin-bottom:14px;
+}
+
+.cardtop{
+background:#090909;
+border:1px solid #222;
+border-radius:14px;
+height:74px;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 0 18px rgba(255,0,0,.08);
+}
+
+.brand{
+justify-content:flex-start;
+padding:0 16px;
+gap:14px;
+}
+
+.logo{
+width:54px;
+height:54px;
+border-radius:14px;
+background:linear-gradient(180deg,#ff0000,#5a0000);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+box-shadow:0 0 18px rgba(255,0,0,.45);
+}
+
+.brand h1{
+font-size:28px;
+}
+
+.brand p{
+font-size:14px;
+color:#bbb;
+}
+
+.live{
+font-size:34px;
+font-weight:bold;
+color:#ff0000;
+text-shadow:0 0 18px red;
+}
+
+.clock{
+font-size:42px;
+font-family:monospace;
+color:#ff0000;
+text-shadow:0 0 18px red;
+}
+
+.btnTop{
+cursor:pointer;
+font-size:22px;
+transition:.3s;
+}
+
+.btnTop:hover{
+background:#ff0000;
+transform:scale(1.03);
+}
+
+/* HERO */
+.hero{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:14px;
+margin-bottom:14px;
+}
+
+.banner{
+position:relative;
+min-height:420px;
+border-radius:18px;
+border:1px solid #400000;
+overflow:hidden;
+padding:40px;
+background:
+radial-gradient(circle at 72% 40%,rgba(255,0,0,.65),transparent 25%),
+linear-gradient(90deg,#050505,#0d0000);
+box-shadow:0 0 30px rgba(255,0,0,.18);
+}
+
+.cross{
+position:absolute;
+right:120px;
+top:70px;
+width:120px;
+height:250px;
+background:#ff0000;
+box-shadow:0 0 40px red;
+}
+
+.cross:before{
+content:"";
+position:absolute;
+left:-70px;
+top:78px;
+width:260px;
+height:90px;
+background:#ff0000;
+box-shadow:0 0 40px red;
+}
+
+.banner h2{
+font-size:70px;
+line-height:1.05;
+max-width:720px;
+position:relative;
+z-index:3;
+}
+
+.banner span{
+color:#ff0000;
+}
+
+.banner p{
+font-size:24px;
+color:#ddd;
+margin-top:22px;
+max-width:650px;
+line-height:1.45;
+position:relative;
+z-index:3;
+}
+
+.heroBtns{
+display:flex;
+gap:18px;
+margin-top:28px;
+position:relative;
+z-index:3;
+}
+
+.bigBtn{
+padding:18px 28px;
+border-radius:14px;
+background:#120000;
+border:1px solid #ff0000;
+font-size:24px;
+cursor:pointer;
+transition:.3s;
+}
+
+.bigBtn:hover{
+transform:scale(1.03);
+box-shadow:0 0 18px rgba(255,0,0,.4);
+}
+
+.share{
+background:#090909;
+border:1px solid #222;
+border-radius:18px;
+padding:22px;
+}
+
+.share h3{
+font-size:30px;
+margin-bottom:18px;
+}
+
+.shareCard{
+height:170px;
+border-radius:14px;
+border:1px solid #333;
+background:#0f0f0f;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+margin-bottom:16px;
+}
+
+.share input{
+width:100%;
+height:54px;
+border-radius:12px;
+border:1px solid #333;
+background:#111;
+color:#fff;
+padding:0 14px;
+font-size:18px;
+}
+
+.copy{
+margin-top:12px;
+width:100%;
+height:58px;
+border:none;
+border-radius:12px;
+background:#ff0000;
+color:#fff;
+font-size:24px;
+cursor:pointer;
+}
+
+.social{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-top:14px;
+}
+
+.social button{
+height:54px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-size:24px;
+}
+
+/* TOCANDO */
+.now{
+background:#090909;
+border:1px solid #222;
+border-radius:16px;
+padding:18px;
+display:grid;
+grid-template-columns:110px 1fr 1.5fr;
+gap:18px;
+align-items:center;
+margin-bottom:14px;
+}
+
+.musicIcon{
+width:88px;
+height:88px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:44px;
+background:#140000;
+box-shadow:0 0 20px red inset;
+}
+
+.now h4{
+color:#ff0000;
+font-size:18px;
+}
+
+.now h3{
+font-size:40px;
+margin:6px 0;
+}
+
+.now p{
+font-size:22px;
+color:#bbb;
+}
+
+/* equalizer */
+.eq{
+height:90px;
+display:flex;
+align-items:flex-end;
+gap:8px;
+justify-content:center;
+}
+
+.eq span,.rightEq span{
+background:#ff0000;
+border-radius:8px;
+animation:eq 1s infinite ease-in-out;
+}
+
+.eq span{
+width:8px;
+}
+
+.rightEq span{
+width:6px;
+}
+
+.eq span:nth-child(1){animation-delay:.1s}
+.eq span:nth-child(2){animation-delay:.2s}
+.eq span:nth-child(3){animation-delay:.3s}
+.eq span:nth-child(4){animation-delay:.4s}
+.eq span:nth-child(5){animation-delay:.5s}
+.eq span:nth-child(6){animation-delay:.6s}
+.eq span:nth-child(7){animation-delay:.7s}
+.eq span:nth-child(8){animation-delay:.8s}
+.eq span:nth-child(9){animation-delay:.9s}
+.eq span:nth-child(10){animation-delay:1s}
+
+@keyframes eq{
+0%{height:12px}
+50%{height:84px}
+100%{height:26px}
+}
+
+/* STATUS */
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-bottom:14px;
+}
+
+.box{
+background:#090909;
+border:1px solid #222;
+border-radius:16px;
+padding:24px;
+min-height:160px;
+}
+
+.box h3{
+font-size:56px;
+color:#ff0000;
+}
+
+.box p{
+font-size:26px;
+line-height:1.4;
+color:#ccc;
+}
+
+/* MENU */
+.tabs{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-bottom:14px;
+}
+
+.tabs button{
+height:62px;
+border:none;
+border-radius:12px;
+background:#0d0d0d;
+color:#fff;
+font-size:24px;
+cursor:pointer;
+transition:.3s;
+}
+
+.tabs button:hover{
+transform:scale(1.02);
+}
+
+.tabs .active{
+background:#ff0000;
+}
+
+/* CONTEUDO */
+.tabcontent{
+display:none;
+}
+
+.tabcontent.active{
+display:block;
+}
+
+.wrap{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.card{
+background:#090909;
+border:1px solid #222;
+border-radius:18px;
+padding:24px;
+}
+
+.card h2{
+font-size:42px;
+margin-bottom:18px;
+}
+
+.row{
+display:grid;
+grid-template-columns:220px 1fr 120px;
+gap:14px;
+padding:18px;
+border:1px solid #222;
+border-radius:14px;
+margin-bottom:12px;
+font-size:24px;
+}
+
+.time{
+color:#ff0000;
+font-weight:bold;
+}
+
+.badge{
+background:#222;
+border-radius:10px;
+padding:12px;
+text-align:center;
+}
+
+.red{
+background:#ff0000;
+}
+
+.grid2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+input{
+height:58px;
+border-radius:12px;
+border:1px solid #333;
+background:#111;
+color:#fff;
+padding:0 14px;
+font-size:20px;
+}
+
+.send{
+margin-top:12px;
+width:100%;
+height:62px;
+border:none;
+border-radius:12px;
+background:#ff0000;
+color:#fff;
+font-size:28px;
+cursor:pointer;
+}
+
+.req{
+margin-top:14px;
+padding:16px;
+border:1px solid #222;
+border-radius:14px;
+font-size:22px;
+display:flex;
+justify-content:space-between;
+gap:10px;
+}
+
+.req button{
+padding:10px 14px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* PLAYER */
+.player{
+position:fixed;
+left:0;
+bottom:0;
+width:100%;
+height:95px;
+background:#000;
+border-top:1px solid #300000;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 18px;
+z-index:999;
+}
+
+.leftPlayer{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.pbtn{
+width:62px;
+height:62px;
+border:none;
+border-radius:50%;
+background:#ff0000;
+color:#fff;
+font-size:24px;
+cursor:pointer;
+}
+
+.mini{
+width:46px;
+height:46px;
+background:#111;
+}
+
+.range{
+width:240px;
+accent-color:#ff0000;
+}
+
+.rightEq{
+display:flex;
+gap:6px;
+height:46px;
+align-items:flex-end;
+}
+
+/* toast */
+.toast{
+position:fixed;
+top:20px;
+right:20px;
+background:#ff0000;
+padding:14px 18px;
+border-radius:10px;
+font-weight:bold;
+z-index:9999;
+display:none;
+}
+
+/* RESPONSIVO */
+@media(max-width:1100px){
+
+.topo,.hero,.wrap{
+grid-template-columns:1fr;
+}
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.tabs{
+grid-template-columns:1fr 1fr;
+}
+
+.banner h2{
+font-size:44px;
+}
+
+.player{
+flex-direction:column;
+height:auto;
+padding:10px;
+gap:10px;
+}
+
+.range{
+width:100%;
+}
+
+.now{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.row{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="toast" id="toast"></div>
+
+<div class="container">
+
+<!-- TOPO -->
+<section class="topo">
+
+<div class="cardtop brand">
+<div class="logo">📻</div>
+<div>
+<h1>Rádio Palavra Viva</h1>
+<p>A Palavra que transforma vidas!</p>
+</div>
+</div>
+
+<div class="cardtop live">🔴 AO VIVO</div>
+
+<div class="cardtop clock" id="clock">00:00:00</div>
+
+<div class="cardtop btnTop" onclick="abrirAdmin()">🔒 Admin</div>
+
+<div class="cardtop btnTop" onclick="copiarLink()">🔗 Compartilhar</div>
+
+</section>
+
+<!-- HERO -->
+<section class="hero">
+
+<div class="banner">
+<div class="cross"></div>
+
+<h2>A Palavra que <span>Transforma Vidas</span></h2>
+
+<p>
+Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias, a qualquer hora.
+</p>
+
+<div class="heroBtns">
+<div class="bigBtn" onclick="playRadio()">🔴 AO VIVO 24H</div>
+<div class="bigBtn" onclick="playRadio()">🎧 Ouça agora</div>
+</div>
+</div>
+
+<div class="share">
+<h3>Compartilhe nossa rádio!</h3>
+
+<div class="shareCard">📻 Rádio Palavra Viva</div>
+
+<input id="linkShare" value="https://feeling-consequence-mechanism-retrieve.trycloudflare.com">
+
+<button class="copy" onclick="copiarLink()">📋 Copiar Link</button>
+
+<div class="social">
+<button onclick="whats()">🟢</button>
+<button onclick="face()">🔵</button>
+<button onclick="telegram()">🐦</button>
+<button onclick="copiarLink()">⚫</button>
+</div>
+
+</div>
+</section>
+
+<!-- TOCANDO -->
+<section class="now">
+<div class="musicIcon">🎵</div>
+
+<div>
+<h4>TOCANDO AGORA</h4>
+<h3>Programação Gospel</h3>
+<p id="statusTxt">Clique em Play para ouvir</p>
+</div>
+
+<div class="eq">
+<span></span><span></span><span></span><span></span><span></span>
+<span></span><span></span><span></span><span></span><span></span>
+</div>
+</section>
+
+<!-- STATUS -->
+<section class="stats">
+
+<div class="box">
+<h3>24h</h3>
+<p>No ar<br>Transmissão ininterrupta</p>
+</div>
+
+<div class="box">
+<h3 id="ouvintes">3</h3>
+<p>Ouvindo agora</p>
+</div>
+
+<div class="box">
+<h3>4</h3>
+<p>Programas diversos</p>
+</div>
+
+<div class="box">
+<h3>Ao Vivo</h3>
+<p>Mensagens e adoração</p>
+</div>
+
+</section>
+
+<!-- MENU -->
+<section class="tabs">
+<button class="active" onclick="abrirTab(0,this)">📅 Programação</button>
+<button onclick="abrirTab(1,this)">🎵 Pedir Música</button>
+<button onclick="abrirTab(2,this)">📻 A Rádio</button>
+<button onclick="abrirTab(3,this)">📝 Pedidos</button>
+</section>
+
+<!-- ABA 1 -->
+<div class="tabcontent active">
+
+<div class="card">
+<h2>Programação</h2>
+
+<div class="row">
+<div class="time">00:00 - 08:00</div>
+<div>Clássicos Evangélicos</div>
+<div class="badge">Noite</div>
+</div>
+
+<div class="row">
+<div class="time">08:00 - 13:00</div>
+<div>Era de Ouro Gospel</div>
+<div class="badge">Manhã</div>
+</div>
+
+<div class="row">
+<div class="time">13:00 - 19:00</div>
+<div>Hits & Lançamentos</div>
+<div class="badge red">AGORA</div>
+</div>
+
+<div class="row">
+<div class="time">19:00 - 00:00</div>
+<div>Programação Gospel</div>
+<div class="badge">Noite</div>
+</div>
+
+</div>
+</div>
+
+<!-- ABA 2 -->
+<div class="tabcontent">
+<div class="card">
+<h2>Pedir Música</h2>
+
+<div class="grid2">
+<input id="nome" placeholder="Seu nome">
+<input id="cidade" placeholder="Cidade">
+<input id="musica" placeholder="Nome da música">
+<input id="cantor" placeholder="Cantor / Banda">
+</div>
+
+<button class="send" onclick="enviarPedido()">📨 Enviar Pedido</button>
+</div>
+</div>
+
+<!-- ABA 3 -->
+<div class="tabcontent">
+<div class="card">
+<h2>A Rádio</h2>
+<p style="font-size:24px;line-height:1.6;color:#ccc">
+A Rádio Palavra Viva transmite louvores, mensagens e programação cristã 24 horas por dia levando esperança para todos os ouvintes.
+</p>
+</div>
+</div>
+
+<!-- ABA 4 -->
+<div class="tabcontent">
+<div class="card">
+<h2>Pedidos Recebidos</h2>
+<div id="listaPedidos"></div>
+</div>
+</div>
+
+</div>
+
+<!-- PLAYER -->
+<div class="player">
+
+<div class="leftPlayer">
+<div class="logo">📻</div>
+<div>
+<strong>Rádio Palavra Viva</strong><br>
+<small id="miniStatus">Ao vivo 24h no ar</small>
+</div>
+</div>
+
+<div style="display:flex;gap:10px;align-items:center;">
+<button class="pbtn mini">⏮</button>
+<button class="pbtn" id="playBtn">▶</button>
+<button class="pbtn mini">⏭</button>
+</div>
+
+<input type="range" class="range" min="0" max="1" step="0.01" value="1" id="vol">
+
+<div class="rightEq">
+<span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+</div>
+
+<audio id="audio">
+<source src="https://feeling-consequence-mechanism-retrieve.trycloudflare.com/stream" type="audio/mpeg">
+</audio>
+
+<script>
+const audio=document.getElementById("audio");
+const playBtn=document.getElementById("playBtn");
+const vol=document.getElementById("vol");
+
+playBtn.onclick=()=>playRadio();
+
+function playRadio(){
+if(audio.paused){
+audio.play().then(()=>{
+playBtn.innerHTML="❚❚";
+statusTxt.innerHTML="🔴 Tocando Agora";
+miniStatus.innerHTML="🔴 Ao vivo agora";
+}).catch(()=>{
+toast("Erro ao conectar stream");
+});
+}else{
+audio.pause();
+playBtn.innerHTML="▶";
+statusTxt.innerHTML="Pausado";
+miniStatus.innerHTML="Pausado";
+}
+}
+
+vol.oninput=()=>audio.volume=vol.value;
+
+/* relógio */
+function hora(){
+let d=new Date();
+clock.innerHTML=d.toLocaleTimeString("pt-BR");
+}
+setInterval(hora,1000);
+hora();
+
+/* ouvintes fake */
+setInterval(()=>{
+ouvintes.innerHTML=Math.floor(Math.random()*8)+2;
+},4000);
+
+/* tabs */
+function abrirTab(n,el){
+document.querySelectorAll(".tabcontent").forEach(x=>x.classList.remove("active"));
+document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));
+document.querySelectorAll(".tabcontent")[n].classList.add("active");
+el.classList.add("active");
+}
+
+/* toast */
+function toast(msg){
+let t=document.getElementById("toast");
+t.innerHTML=msg;
+t.style.display="block";
+setTimeout(()=>t.style.display="none",2500);
+}
+
+/* compartilhar */
+function copiarLink(){
+navigator.clipboard.writeText(linkShare.value);
+toast("Link copiado!");
+}
+
+function whats(){
+window.open("https://wa.me/?text="+encodeURIComponent(linkShare.value));
+}
+
+function face(){
+window.open("https://facebook.com");
+}
+
+function telegram(){
+window.open("https://t.me/share/url?url="+encodeURIComponent(linkShare.value));
+}
+
+/* pedidos */
+function carregarPedidos(){
+let lista=JSON.parse(localStorage.getItem("pedidos")||"[]");
+listaPedidos.innerHTML="";
+
+if(lista.length==0){
+listaPedidos.innerHTML="<p style='font-size:22px;color:#aaa'>Nenhum pedido.</p>";
+return;
+}
+
+lista.forEach((p,i)=>{
+listaPedidos.innerHTML+=`
+<div class="req">
+<div>
+<strong>${p.nome}</strong><br>
+${p.musica} - ${p.cantor}<br>
+<small>${p.cidade}</small>
+</div>
+<div>
+<button onclick="apagarPedido(${i})">🗑</button>
+</div>
+</div>`;
+});
+}
+
+function enviarPedido(){
+let nome=nomeInput("nome");
+let cidade=nomeInput("cidade");
+let musica=nomeInput("musica");
+let cantor=nomeInput("cantor");
+
+if(!nome||!musica){
+toast("Preencha os campos");
+return;
+}
+
+let lista=JSON.parse(localStorage.getItem("pedidos")||"[]");
+lista.push({nome,cidade,musica,cantor});
+localStorage.setItem("pedidos",JSON.stringify(lista));
+
+document.getElementById("nome").value="";
+document.getElementById("cidade").value="";
+document.getElementById("musica").value="";
+document.getElementById("cantor").value="";
+
+toast("Pedido enviado!");
+carregarPedidos();
+}
+
+function nomeInput(id){
+return document.getElementById(id).value.trim();
+}
+
+function apagarPedido(i){
+let lista=JSON.parse(localStorage.getItem("pedidos")||"[]");
+lista.splice(i,1);
+localStorage.setItem("pedidos",JSON.stringify(lista));
+carregarPedidos();
+toast("Pedido removido");
+}
+
+/* admin */
+function abrirAdmin(){
+let s=prompt("Senha admin:");
+if(s==="1234"){
+abrirTab(3,document.querySelectorAll(".tabs button")[3]);
+toast("Painel liberado");
+}else{
+toast("Senha incorreta");
+}
+}
+
+carregarPedidos();
+</script>
+
+</body>
+</html>
