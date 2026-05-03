@@ -37,8 +37,8 @@ margin:auto;
 
 /* TOPO */
 .topo{
+display:grid;
 grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-}
 gap:14px;
 margin-bottom:14px;
 }
@@ -624,7 +624,7 @@ grid-template-columns:1fr;
 <h1>Rádio Palavra Viva - WEB</h1>
 <p>A Palavra que transforma vidas!</p>
 </div>
-</div>
+</section>
 
 <div class="cardtop live" id="liveLed">⚫ OFFLINE</div>
 
@@ -634,7 +634,7 @@ grid-template-columns:1fr;
 
 <div class="cardtop btnTop" onclick="copiarLink()">🔗 Compartilhar</div>
 
-</div>
+</section>
 
 <!-- HERO -->
 <section class="hero">
@@ -652,7 +652,7 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 <div class="bigBtn" onclick="playRadio()">🔴 AO VIVO 24H</div>
 <div class="bigBtn" onclick="playRadio()">🎧 Ouça agora</div>
 </div>
-</div>
+</section>
 
 <div class="share">
 <h3>Compartilhe nossa rádio!</h3>
@@ -671,7 +671,7 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 </div>
 
 </div>
-</div>
+</section>
 
 <!-- TOCANDO -->
 <section class="now">
@@ -681,13 +681,13 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 <h4>TOCANDO AGORA</h4>
 <h3>Programação Gospel</h3>
 <p id="statusTxt">Clique em Play para ouvir</p>
-</div>
+</section>
 
 <div class="eq">
 <span></span><span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span><span></span>
 </div>
-</div>
+</section>
 
 <!-- STATUS -->
 <section class="stats">
@@ -712,7 +712,7 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 <p>Mensagens e adoração</p>
 </div>
 
-</div>
+</section>
 
 <!-- MENU -->
   
@@ -754,7 +754,7 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 </div>
 
 </div>
-</div>
+</section>
 
 <!-- ABA 2 -->
 <div class="tabcontent">
@@ -770,7 +770,7 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 
 <button class="send" onclick="enviarPedido()">📨 Enviar Pedido</button>
 </div>
-</div>
+</section>
 
 <!-- ABA 3 -->
 <div class="tabcontent">
@@ -781,7 +781,7 @@ Rádio Palavra Viva Web nasceu para tocar vidas, restaurar corações e levar a 
 .
 </p>
 </div>
-</div>
+</section>
 
 <!-- ABA 4 -->
 <div class="tabcontent">
@@ -791,7 +791,7 @@ Rádio Palavra Viva Web nasceu para tocar vidas, restaurar corações e levar a 
 </div>
 </div>
 
-</div>
+</section>
 
 <!-- PLAYER -->
 <div class="player">
@@ -802,7 +802,7 @@ Rádio Palavra Viva Web nasceu para tocar vidas, restaurar corações e levar a 
 <strong>Rádio Palavra Viva - WEB</strong><br>
 <small id="miniStatus">Ao vivo 24h no ar</small>
 </div>
-</div>
+</section>
 
 <div style="display:flex;gap:10px;align-items:center;">
 <button class="pbtn mini">⏮</button>
@@ -818,7 +818,7 @@ Rádio Palavra Viva Web nasceu para tocar vidas, restaurar corações e levar a 
 <span></span><span></span><span></span><span></span><span></span>
 </div>
 </div>
-</div>
+</section>
 
 </div>
 
@@ -827,7 +827,10 @@ Rádio Palavra Viva Web nasceu para tocar vidas, restaurar corações e levar a 
 </audio>
 
 <script>
-  linkShare.value=window.location.origin+"/stream";
+  const statusTxt = document.getElementById("statusTxt");
+const miniStatus = document.getElementById("miniStatus");
+  const linkShare = document.getElementById("linkShare");
+linkShare.value = window.location.origin + "/stream";
   function atualizarProgramacao(){
 let h=new Date().getHours();
 
@@ -866,8 +869,17 @@ playBtn.onclick=()=>playRadio();
 atualizarLed();
   function atualizarLed(){
 let led=document.getElementById("liveLed");
-    audio.onplay=atualizarLed;
-audio.onpause=atualizarLed;
+ function atualizarLed(){
+let led=document.getElementById("liveLed");
+
+if(!audio.paused){
+led.innerHTML="🔴 AO VIVO";
+led.style.color="red";
+}else{
+led.innerHTML="⚫ OFFLINE";
+led.style.color="#aaa";
+}
+}
 
 if(!audio.paused){
 led.innerHTML="🔴 AO VIVO";
