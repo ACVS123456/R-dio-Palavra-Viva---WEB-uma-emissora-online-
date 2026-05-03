@@ -37,8 +37,8 @@ margin:auto;
 
 /* TOPO */
 .topo{
-display:grid;
-grid-template-columns:1.6fr .8fr .8fr .6fr .8fr;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+}
 gap:14px;
 margin-bottom:14px;
 }
@@ -113,7 +113,15 @@ grid-template-columns:2fr 1fr;
 gap:14px;
 margin-bottom:14px;
 }
+body{
+overflow-x:hidden;
+}
 
+.container{
+max-width:1200px;
+margin:auto;
+padding:0 10px;
+}
 .banner{
 position:relative;
 min-height:420px;
@@ -131,21 +139,27 @@ box-shadow:0 0 30px rgba(255,0,0,.18);
 position:absolute;
 right:120px;
 top:70px;
-width:120px;
-height:250px;
-background:#ff0000;
-box-shadow:0 0 40px red;
+width:140px;
+height:260px;
+background:linear-gradient(180deg,#ff2a2a,#5a0000);
+border-radius:10px;
+box-shadow:
+0 0 40px rgba(255,0,0,.7),
+inset 0 0 20px rgba(0,0,0,.6);
 }
 
 .cross:before{
 content:"";
 position:absolute;
-left:-70px;
-top:78px;
-width:260px;
-height:90px;
-background:#ff0000;
-box-shadow:0 0 40px red;
+left:-80px;
+top:90px;
+width:300px;
+height:100px;
+background:linear-gradient(90deg,#ff2a2a,#5a0000);
+border-radius:10px;
+box-shadow:
+0 0 40px rgba(255,0,0,.7),
+inset 0 0 20px rgba(0,0,0,.6);
 }
 
 .banner h2{
@@ -612,7 +626,7 @@ grid-template-columns:1fr;
 </div>
 </div>
 
-<div class="cardtop live">🔴 AO VIVO</div>
+<div class="cardtop live" id="liveLed">⚫ OFFLINE</div>
 
 <div class="cardtop clock" id="clock">00:00:00</div>
 
@@ -620,7 +634,7 @@ grid-template-columns:1fr;
 
 <div class="cardtop btnTop" onclick="copiarLink()">🔗 Compartilhar</div>
 
-</section>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -645,7 +659,7 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 
 <div class="shareCard">📻 Rádio Palavra Viva</div>
 
-<input id="linkShare" value="https://feeling-consequence-mechanism-retrieve.trycloudflare.com">
+<input id="linkShare">
 
 <button class="copy" onclick="copiarLink()">📋 Copiar Link</button>
 
@@ -657,7 +671,7 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 </div>
 
 </div>
-</section>
+</div>
 
 <!-- TOCANDO -->
 <section class="now">
@@ -673,7 +687,7 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 <span></span><span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span><span></span>
 </div>
-</section>
+</div>
 
 <!-- STATUS -->
 <section class="stats">
@@ -692,21 +706,22 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias,
 <h3>4</h3>
 <p>Programas diversos</p>
 </div>
-
+<div id="programacao"></div>
 <div class="box">
 <h3>Ao Vivo</h3>
 <p>Mensagens e adoração</p>
 </div>
 
-</section>
+</div>
 
 <!-- MENU -->
+  
 <section class="tabs">
 <button class="active" onclick="abrirTab(0,this)">📅 Programação</button>
 <button onclick="abrirTab(1,this)">🎵 Pedir Música</button>
 <button onclick="abrirTab(2,this)">📻 A Rádio</button>
 <button onclick="abrirTab(3,this)">📝 Pedidos</button>
-</section>
+</div>
 
 <!-- ABA 1 -->
 <div class="tabcontent active">
@@ -802,22 +817,66 @@ Rádio Palavra Viva Web nasceu para tocar vidas, restaurar corações e levar a 
 <span></span><span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span><span></span>
 </div>
-</section>
+</div>
 </div>
 
 </div>
 
 <audio id="audio">
-<source src="https://vaccine-relationships-proposal-insight.trycloudflare.com/stream" type="audio/mpeg">
+<source src="https://conversations-remarkable-grass-chapter.trycloudflare.com/stream" type="audio/mpeg">
 </audio>
 
 <script>
+  linkShare.value=window.location.origin+"/stream";
+  function atualizarProgramacao(){
+let h=new Date().getHours();
+
+let programas=[
+{inicio:0,fim:8,nome:"Clássicos Evangélicos",tag:"Noite"},
+{inicio:8,fim:13,nome:"Era de Ouro Gospel",tag:"Manhã"},
+{inicio:13,fim:19,nome:"Hits & Lançamentos",tag:"Tarde"},
+{inicio:19,fim:24,nome:"Programação Gospel",tag:"Noite"}
+];
+
+let html="";
+
+programas.forEach(p=>{
+let agora=(h>=p.inicio && h<p.fim);
+
+html+=`
+<div class="row">
+<div class="time">${p.inicio}:00 - ${p.fim}:00</div>
+<div>${p.nome}</div>
+<div class="badge ${agora?'red':''}">
+${agora?'AGORA':p.tag}
+</div>
+</div>`;
+});
+
+document.getElementById("programacao").innerHTML=html;
+}
+
+setInterval(atualizarProgramacao,60000);
+atualizarProgramacao();
 const audio=document.getElementById("audio");
 const playBtn=document.getElementById("playBtn");
 const vol=document.getElementById("vol");
 
 playBtn.onclick=()=>playRadio();
+atualizarLed();
+  function atualizarLed(){
+let led=document.getElementById("liveLed");
+    audio.onplay=atualizarLed;
+audio.onpause=atualizarLed;
 
+if(!audio.paused){
+led.innerHTML="🔴 AO VIVO";
+led.style.color="red";
+}else{
+led.innerHTML="⚫ OFFLINE";
+led.style.color="#aaa";
+}
+}
 function playRadio(){
 if(audio.paused){
 audio.play().then(()=>{
