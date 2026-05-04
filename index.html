@@ -271,29 +271,29 @@
 
     <script>
 const audioStream = document.getElementById('audioStream');
-
+let isPlaying = false;
+let loading = false;
 if (audioStream) {
     audioStream.volume = 0.8;
     audioStream.crossOrigin = "anonymous";
 
+    // erro + reconexão automática
     audioStream.addEventListener('error', () => {
-        alert("Erro ao conectar ao stream 😢");
+        console.log("Erro no stream, tentando reconectar...");
+        setTimeout(() => {
+            audioStream.load();
+            if (isPlaying) audioStream.play();
+        }, 3000);
+    });
+
+    // quando trava
+    audioStream.addEventListener('stalled', () => {
+        console.log("Reconectando...");
+        audioStream.load();
+        if (isPlaying) audioStream.play();
     });
 }
-        let pedidos = [];
-        let isPlaying = false;
-        const MASTER_PASS = "1234";
 
-        function tab(id, btn) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-            if(btn) {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            }
-        }
-
-let loading = false;
 
 let loading = false;
 
@@ -301,13 +301,15 @@ function togglePlay() {
     if (loading) return;
 
     const player = document.getElementById('mainPlayer');
+    
     const icon = document.getElementById('playIcon');
     const status = document.getElementById('trackStatus');
 
     if (!isPlaying) {
         loading = true;
 
-        audioStream.load(); // 🔥 IMPORTANTE
+       audioStream.src = "https://intend-vegetables-she-counseling.trycloudflare.com/stream";
+audioStream.load(); // 🔥 IMPORTANTE
 
         audioStream.play()
         .then(() => {
@@ -335,19 +337,7 @@ function togglePlay() {
         status.style.color = "var(--text-gray)";
     }
 }
-        audioStream.addEventListener('stalled', () => {
-    console.log("Reconectando...");
-    audioStream.load();
-    if (isPlaying) audioStream.play();
-});
-
-audioStream.addEventListener('error', () => {
-    console.log("Erro no stream, tentando reconectar...");
-    setTimeout(() => {
-        audioStream.load();
-        if (isPlaying) audioStream.play();
-    }, 3000);
-});
+      
         function enviarPedido() {
             const p = {
                 id: Date.now(),
