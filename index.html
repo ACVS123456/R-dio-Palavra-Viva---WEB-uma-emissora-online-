@@ -1,445 +1,159 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rádio Palavra Viva | Central Definitiva</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --red-pure: #ff0000;
-            --red-glow: rgba(255, 0, 0, 0.6);
-            --bg-dark: #050505;
-            --panel: #0d0d0d;
-            --border: #1a1a1a;
-            --text-gray: #888;
-        }
+<meta charset="UTF-8">
+<title>Rádio Palavra viva - WEB</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: var(--bg-dark); color: white; padding: 20px; padding-bottom: 120px; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 1100px; }
-        .hidden { display: none !important; }
+<style>
+body {
+    background: black;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
 
-        /* --- ANIMAÇÕES --- */
-        @keyframes blink { 0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--red-pure); } 50% { opacity: 0.3; box-shadow: 0 0 0px var(--red-pure); } }
-        @keyframes wave { 0%, 100% { height: 5px; } 50% { height: 25px; } }
+header {
+    background: linear-gradient(red, blue, purple);
+    padding: 20px;
+}
 
-        /* --- HEADER --- */
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .logo-box { background: var(--red-pure); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 0 15px var(--red-glow); }
-        .clock { font-size: 32px; color: var(--red-pure); font-family: 'Courier New', monospace; text-shadow: 0 0 10px var(--red-glow); }
-        
-        .led-live { background: var(--red-pure); padding: 6px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; animation: blink 1.5s infinite; display: flex; align-items: center; gap: 5px; cursor: default; }
+button {
+    padding: 10px;
+    background: red;
+    color: white;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+}
 
-        /* --- HERO --- */
-        .hero { 
-            height: 380px; background: linear-gradient(to right, #000 45%, transparent), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?q=80&w=1200');
-            background-size: cover; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 25px;
-            display: flex; align-items: center; padding: 50px; position: relative; overflow: hidden;
-        }
-        .hero h1 { font-size: 48px; line-height: 1.1; font-weight: 800; }
-        .hero h1 span { color: var(--red-pure); }
-        .cross-bg { position: absolute; right: 80px; font-size: 200px; text-shadow: 0 0 40px var(--red-pure); opacity: 0.8; }
+input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+}
 
-        /* --- CARDS DE STATUS (FERRAMENTA RECUPERADA) --- */
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px; }
-        .stat-card { background: var(--panel); border: 1px solid var(--border); padding: 20px; border-radius: 15px; display: flex; align-items: center; gap: 15px; }
-        .stat-icon { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #333; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--red-pure); }
-
-        /* --- NAVEGAÇÃO --- */
-        .tabs-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #222; border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid #222; }
-        .tab-btn { background: var(--panel); color: var(--text-gray); padding: 15px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .tab-btn.active { background: var(--red-pure); color: white; }
-
-        /* --- PAINÉIS --- */
-        .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: 25px; min-height: 450px; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-        
-        input { background: #151515; border: 1px solid #222; color: white; padding: 12px; border-radius: 8px; width: 100%; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--red-pure); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
-        
-        .btn-action { background: var(--red-pure); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-action:hover { transform: translateY(-2px); box-shadow: 0 5px 15px var(--red-glow); }
-
-        /* --- LISTAS --- */
-        .item-row { background: #151515; padding: 15px; border-radius: 12px; margin-bottom: 10px; border-left: 4px solid var(--red-pure); display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .item-row:hover { background: #1a1a1a; }
-        .tag-status { background: #222; padding: 4px 10px; border-radius: 5px; font-size: 10px; color: #888; }
-        .tag-now { background: var(--red-pure); color: white; }
-
-        /* --- MODAL --- */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 5000; }
-        .modal-card { background: var(--panel); padding: 30px; border-radius: 25px; width: 420px; border: 1px solid #333; text-align: center; position: relative; }
-
-        /* --- PLAYER BAR --- */
-        .footer-player {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: #000; border-top: 2px solid var(--red-pure);
-            padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 4000;
-        }
-        .play-btn {
-            width: 60px; height: 60px; background: var(--red-pure); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 22px;
-            cursor: pointer; border: none; color: white; transition: 0.4s; box-shadow: 0 0 15px var(--red-glow);
-        }
-        .playing-now .play-btn { transform: scale(1.1); box-shadow: 0 0 30px var(--red-pure); }
-
-        .eq-container { display: flex; align-items: flex-end; gap: 3px; height: 30px; }
-        .eq-bar { width: 3px; background: var(--red-pure); border-radius: 2px; height: 5px; transition: 0.2s; }
-        .playing-now .eq-bar { animation: wave 1s ease-in-out infinite; }
-        .playing-now .eq-bar:nth-child(2) { animation-duration: 0.6s; }
-        .playing-now .eq-bar:nth-child(3) { animation-duration: 1.1s; }
-        .playing-now .eq-bar:nth-child(4) { animation-duration: 0.8s; }
-    </style>
+.section {
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #333;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="container">
-        <!-- HEADER -->
-        <header>
-            <div style="display:flex; align-items:center; gap:15px;">
-                <div class="logo-box"><i class="fa-solid fa-cross"></i></div>
-                <div>
-                    <h2 style="font-size: 1.2rem;">Rádio Palavra Viva</h2>
-                    <p style="font-size:11px; color: var(--text-gray);">A Palavra que transforma vidas!</p>
-                </div>
-            </div>
-            <div class="led-live">● AO VIVO</div>
-            <div class="clock" id="liveClock">21:16:53</div>
-            <div style="display:flex; gap:10px;">
-                <button onclick="tab('tab-admin')" class="btn-action" style="background:#1a0000; border:1px solid var(--red-pure); width:auto; padding:8px 20px;"><i class="fa-solid fa-lock"></i> Admin</button>
-                <button onclick="toggleModal(true)" class="btn-action" style="width:auto; padding:8px 20px;"><i class="fa-solid fa-share-nodes"></i> Compartilhar</button>
-            </div>
-        </header>
+<header>
+<h1>📻 Rádio Palavra viva - WEB</h1>
+<p>Levando a palavra de Deus ao mundo</p>
+</header>
 
-        <!-- HERO -->
-        <section class="hero">
-            <div style="z-index: 2;">
-                <button class="tag-now" style="border:none; padding:5px 15px; border-radius:20px; font-size:10px; margin-bottom:15px; font-weight:bold;">● AO VIVO 24H</button>
-                <h1>A Palavra que<br><span>Transforma Vidas</span></h1>
-                <p style="color:#ccc; margin: 20px 0; max-width: 450px;">Louvores, adoração e mensagens bíblicas que fortalecem a sua fé todos os dias.</p>
-                <div style="display:flex; gap:15px;">
-                    <button class="btn-action" style="width:auto; padding: 12px 30px;" onclick="togglePlay()">Ouça agora mesmo!</button>
-                </div>
-            </div>
-            <div class="cross-bg"><i class="fa-solid fa-cross"></i></div>
-        </section>
+<!-- PLAYER -->
+<div class="section">
+<h2>🔴 AO VIVO</h2>
 
-        <!-- ESTATÍSTICAS (FERRAMENTA MANTIDA) -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fa-regular fa-clock"></i></div>
-                <div><b style="font-size:18px;">24h</b><br><small style="color:var(--text-gray)">No ar</small></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
-                <div><b style="font-size:18px;">1.250</b><br><small style="color:var(--text-gray)">Ouvintes</small></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
-                <div><b style="font-size:18px;">7 Dias</b><br><small style="color:var(--text-gray)">Por semana</small></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-signal"></i></div>
-                <div><b style="font-size:18px; color:#00ff00;">Excelente</b><br><small style="color:var(--text-gray)">Sinal</small></div>
-            </div>
-        </div>
-
-        <!-- NAV -->
-        <div class="tabs-nav">
-            <button class="tab-btn active" onclick="tab('tab-prog', this)"><i class="fa-solid fa-calendar-day"></i> Programação</button>
-            <button class="tab-btn" onclick="tab('tab-pedir', this)"><i class="fa-solid fa-music"></i> Pedir Música</button>
-            <button class="tab-btn" onclick="tab('tab-sobre', this)"><i class="fa-solid fa-circle-info"></i> A Rádio</button>
-            <button class="tab-btn" onclick="tab('tab-admin', this)"><i class="fa-solid fa-user-shield"></i> Pedidos (Admin)</button>
-        </div>
-
-        <!-- ABAS -->
-        <div id="tab-prog" class="panel tab-content">
-            <h3 style="margin-bottom:25px;"><i class="fa-solid fa-list-ul" style="color:var(--red-pure)"></i> Grade Semanal</h3>
-            <div class="item-row">
-                <div><span style="color:var(--red-pure)">00:00 - 08:00</span><br><b>Clássicos Evangélicos</b></div>
-                <span class="tag-status">Noturno</span>
-            </div>
-            <div class="item-row">
-                <div><span style="color:var(--red-pure)">08:00 - 13:00</span><br><b>Era de Ouro Gospel</b></div>
-                <span class="tag-status">Manhã</span>
-            </div>
-            <div class="item-row" style="border-color: #00ff00; background: #0a150a;">
-                <div><span style="color:#00ff00">13:00 - 19:00</span><br><b>Hits & Lançamentos</b></div>
-                <span class="tag-status tag-now">AGORA</span>
-            </div>
-        </div>
-
-        <div id="tab-pedir" class="panel tab-content hidden">
-            <h3><i class="fa-solid fa-microphone" style="color:var(--red-pure)"></i> Peça seu Louvor</h3>
-            <div style="margin-top:25px;">
-                <div class="grid-2">
-                    <div><label style="font-size:11px; color:#666;">Seu nome</label><input type="text" id="p_nome" placeholder="Como quer ser chamado?"></div>
-                    <div><label style="font-size:11px; color:#666;">Cidade</label><input type="text" id="p_cidade" placeholder="De onde você ouve?"></div>
-                </div>
-                <div class="grid-2">
-                    <div><label style="font-size:11px; color:#666;">Música</label><input type="text" id="p_musica" placeholder="Nome do louvor"></div>
-                    <div><label style="font-size:11px; color:#666;">Cantor / Banda</label><input type="text" id="p_artista" placeholder="Quem canta?"></div>
-                </div>
-                <button class="btn-action" onclick="enviarPedido()"><i class="fa-solid fa-paper-plane"></i> Enviar Pedido ao Locutor</button>
-            </div>
-            <div style="margin-top:40px;">
-                <h4 style="color:var(--text-gray); margin-bottom:15px; border-bottom:1px solid #222; padding-bottom:10px;">Pedidos Recentes</h4>
-                <div id="recentes"></div>
-            </div>
-        </div>
-
-        <div id="tab-sobre" class="panel tab-content hidden">
-            <h3>Sobre a Palavra Viva</h3>
-            <p style="margin-top:20px; line-height: 1.8; color: #aaa; font-size: 15px;">
-                A Rádio Palavra Viva nasceu no coração de Deus para levar esperança e fé através das ondas digitais. 
-                Transmitindo diretamente de nosso servidor local, alcançamos vidas com uma curadoria musical focada na adoração genuína.
-            </p>
-        </div>
-
-        <div id="tab-admin" class="panel tab-content hidden">
-            <div id="admin-lock" class="admin-lock-screen">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h3 style="margin-top:10px;">Painel de Controle</h3>
-                <p style="color:#555; font-size:13px; margin-bottom:20px;">Acesso exclusivo para o locutor de plantão</p>
-                <input type="password" id="pass" placeholder="Senha do Administrador" style="max-width:300px; text-align:center;">
-                <button class="btn-action" style="max-width:300px; margin-top:10px;" onclick="checkAdmin()">Entrar no Sistema</button>
-            </div>
-            <div id="admin-view" class="hidden">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
-                    <h3><i class="fa-solid fa-list-check" style="color:var(--red-pure)"></i> Pedidos em Espera</h3>
-                    <button onclick="logout()" style="background:#222; border:none; color:white; padding:8px 20px; border-radius:8px; cursor:pointer;"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
-                </div>
-                <div id="master-lista"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL SHARE COMPLETO -->
-    <div class="modal-overlay" id="modalShare">
-        <div class="modal-card">
-            <div style="background:#000; padding:25px; border-radius:20px; border:2px solid var(--red-pure); margin-bottom:25px; box-shadow: 0 0 20px var(--red-glow);">
-                <div class="logo-box" style="margin: 0 auto 15px;"><i class="fa-solid fa-cross"></i></div>
-                <h3 style="margin-bottom:5px;">Rádio Palavra Viva</h3>
-                <p style="color:var(--red-pure); font-size:11px; font-weight:bold; letter-spacing:2px;">● TRANSMITINDO AO VIVO</p>
-            </div>
-            <p style="font-size:13px; color:#888; margin-bottom:10px;">Compartilhe o link da nossa rádio:</p>
-            <input type="text" value="http://localhost:8080/radio" readonly style="text-align:center; margin-bottom:20px; background:#000; color:var(--red-pure);">
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                <button class="btn-action" onclick="alert('Link Copiado!'); toggleModal(false)">Copiar Link</button>
-                <button class="btn-action" style="background:#222;" onclick="toggleModal(false)">Fechar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- PLAYER BAR -->
-    <footer class="footer-player" id="mainPlayer">
-        <div style="display:flex; align-items:center; gap:20px;">
-            <div class="eq-container">
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-            </div>
-            <div>
-                <b id="trackName" style="font-size:14px;">Programação Gospel 24h</b><br>
-                <small id="trackStatus" style="color:var(--text-gray); font-size:11px;">Clique no Play para ouvir agora mesmo!</small>
-            </div>
-        </div>
-
-        <div style="display:flex; align-items:center; gap:25px;">
-            <i class="fa-solid fa-backward-step" style="color:#222; cursor:not-allowed;"></i>
-            <button class="play-btn" onclick="togglePlay()">
-                <i class="fa-solid fa-play" id="playIcon"></i>
-            </button>
-            <i class="fa-solid fa-forward-step" style="color:#222; cursor:not-allowed;"></i>
-        </div>
-
-        <div style="width:250px; display:flex; align-items:center; gap:15px;">
-            <i class="fa-solid fa-volume-high" style="color:#444"></i>
-            <div style="flex:1; height:4px; background:#222; border-radius:2px; position:relative;">
-                <div style="width:85%; height:100%; background:var(--red-pure); border-radius:2px;"></div>
-                <div style="position:absolute; left:85%; top:-4px; width:12px; height:12px; background:white; border-radius:50%; box-shadow:0 0 10px white;"></div>
-            </div>
-        </div>
-    </footer>
-   <audio controls autoplay>
-  <audio id="https://intend-vegetables-she-counseling.trycloudflare.com/stream" preload="none"></audio>
+<audio id="player" controls autoplay>
+    <source src="https://intend-vegetables-she-counseling.trycloudflare.com/stream" type="audio/mpeg">
 </audio>
+
+<br>
+<button onclick="play()">▶️ Play</button>
+<button onclick="pause()">⏸️ Pause</button>
+</div>
+
+<!-- PEDIDO -->
+<div class="section">
+<h2>🎵 Pedir Música</h2>
+<input id="musica" placeholder="Digite a música">
+<button onclick="enviarPedido()">Enviar</button>
+
+<div id="listaPedidos"></div>
+</div>
+
+<!-- CHAT -->
+<div class="section">
+<h2>💬 Chat ao Vivo</h2>
+
+<input id="nome" placeholder="Seu nome">
+<input id="msg" placeholder="Mensagem">
+<button onclick="enviarMsg()">Enviar</button>
+
+<div id="chat"></div>
+</div>
+
 <script>
-<script>
-const audioStream = document.getElementById('audioStream');
-let isPlaying = false;
-let loading = false;
-
-if (audioStream) {
-    audioStream.volume = 0.8;
-    audioStream.crossOrigin = "anonymous";
-
-    audioStream.addEventListener('error', () => {
-        console.log("Erro no stream, tentando reconectar...");
-        setTimeout(() => {
-            audioStream.load();
-            if (isPlaying) audioStream.play();
-        }, 3000);
-    });
-
-    audioStream.addEventListener('stalled', () => {
-        console.log("Reconectando...");
-        audioStream.load();
-        if (isPlaying) audioStream.play();
-    });
+// PLAYER
+function play(){
+    document.getElementById("player").play();
 }
 
-function togglePlay() {
-    const player = document.getElementById('mainPlayer');
-    const icon = document.getElementById('playIcon');
-    const status = document.getElementById('trackStatus');
-
-    if (loading) return;
-
-    if (!isPlaying) {
-        loading = true;
-
-        audioStream.src = "https://intend-vegetables-she-counseling.trycloudflare.com/stream";
-        audioStream.load();
-
-        audioStream.play()
-        .then(() => {
-            isPlaying = true;
-            loading = false;
-
-            player.classList.add('playing-now');
-            icon.className = "fa-solid fa-pause";
-            status.innerText = "🔴 AO VIVO - Rádio Palavra Viva";
-        })
-        .catch(() => {
-            loading = false;
-            alert("Clique novamente para tocar");
-        });
-
-    } else {
-        audioStream.pause();
-        isPlaying = false;
-
-        player.classList.remove('playing-now');
-        icon.className = "fa-solid fa-play";
-        status.innerText = "Pausado";
-    }
+function pause(){
+    document.getElementById("player").pause();
 }
+
+// 🎵 PEDIDOS (localStorage)
+function enviarPedido(){
+    let musica = document.getElementById('musica').value;
+
+    if(!musica) return alert("Digite uma música");
+
+    let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+    pedidos.push(musica);
+
+    localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
+    document.getElementById('musica').value = "";
+    carregarPedidos();
+}
+
+function carregarPedidos(){
+    let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+
+    let html = "<h3>🎧 Pedidos recentes:</h3>";
+
+    pedidos.slice().reverse().forEach(p=>{
+        html += `<p>🎵 ${p}</p>`;
+    });
+
+    document.getElementById('listaPedidos').innerHTML = html;
+}
+
+// 💬 CHAT (localStorage)
+function enviarMsg(){
+    let nome = document.getElementById('nome').value;
+    let msg = document.getElementById('msg').value;
+
+    if(!nome || !msg) return alert("Preencha tudo");
+
+    let chat = JSON.parse(localStorage.getItem('chat')) || [];
+
+    chat.push({nome, msg});
+
+    localStorage.setItem('chat', JSON.stringify(chat));
+
+    document.getElementById('msg').value = "";
+    carregarChat();
+}
+
+function carregarChat(){
+    let chat = JSON.parse(localStorage.getItem('chat')) || [];
+
+    let html = "";
+    chat.forEach(m=>{
+        html += `<p><b>${m.nome}:</b> ${m.msg}</p>`;
+    });
+
+    document.getElementById('chat').innerHTML = html;
+}
+
+// AUTO LOAD
+setInterval(carregarChat, 1000);
+setInterval(carregarPedidos, 2000);
+
+carregarChat();
+carregarPedidos();
 </script>
 
-function togglePlay() {
-    console.log("CLICOU NO PLAY"); // 👈 adiciona isso
-
-    if (loading) return;
-
-    const player = document.getElementById('mainPlayer');
-    
-    const icon = document.getElementById('playIcon');
-    const status = document.getElementById('trackStatus');
-
-    if (!isPlaying) {
-        loading = true;
-
-       audioStream.src = "https://intend-vegetables-she-counseling.trycloudflare.com/stream";
-audioStream.load(); // 🔥 IMPORTANTE
-
-       audioStream.play()
-.then(() => {
-    console.log("TOCANDO ✅"); // 👈 AQUI
-
-    isPlaying = true;
-    loading = false;
-
-    player.classList.add('playing-now');
-    icon.className = "fa-solid fa-pause";
-    status.innerText = "🔴 AO VIVO - Rádio Palavra Viva";
-    status.style.color = "var(--red-pure)";
-})
-.catch((err) => {
-    loading = false;
-
-    console.log("ERRO AO TOCAR ❌:", err); // 👈 AQUI
-
-    alert("⚠️ Toque novamente para iniciar o áudio");
-});
-
-    } else {
-        audioStream.pause();
-        isPlaying = false;
-
-        player.classList.remove('playing-now');
-        icon.className = "fa-solid fa-play";
-        status.innerText = "Pausado";
-        status.style.color = "var(--text-gray)";
-    }
-}
-      
-        function enviarPedido() {
-            const p = {
-                id: Date.now(),
-                nome: document.getElementById('p_nome').value,
-                cidade: document.getElementById('p_cidade').value,
-                musica: document.getElementById('p_musica').value,
-                artista: document.getElementById('p_artista').value,
-                hora: new Date().toLocaleTimeString()
-            };
-            if(!p.nome || !p.musica) return alert("Por favor, preencha pelo menos o seu nome e a música!");
-            pedidos.unshift(p);
-            renderRecentes();
-            alert("Sucesso! Seu pedido de música foi enviado para o locutor.");
-            document.querySelectorAll('input').forEach(i => i.value = "");
-        }
-
-        function renderRecentes() {
-            const div = document.getElementById('recentes');
-            div.innerHTML = pedidos.slice(0, 3).map(p => `
-                <div class="item-row" style="opacity: 0.8; font-size:12px;">
-                    <span><i class="fa-solid fa-music" style="color:red; margin-right:8px;"></i><b>${p.musica}</b> - ${p.nome}</span>
-                    <small style="color:#555">${p.hora}</small>
-                </div>
-            `).join('');
-        }
-
-        function checkAdmin() {
-            if(document.getElementById('pass').value === MASTER_PASS) {
-                document.getElementById('admin-lock').classList.add('hidden');
-                document.getElementById('admin-view').classList.remove('hidden');
-                renderAdmin();
-            } else { alert("Acesso Negado! Senha incorreta."); }
-        }
-
-        function logout() {
-            document.getElementById('admin-lock').classList.remove('hidden');
-            document.getElementById('admin-view').classList.add('hidden');
-            document.getElementById('pass').value = "";
-        }
-
-        function renderAdmin() {
-            const list = document.getElementById('master-lista');
-            list.innerHTML = pedidos.length ? pedidos.map(p => `
-                <div class="item-row">
-                    <div>
-                        <b style="color:var(--red-pure)">${p.musica}</b><br>
-                        <small>Interprete: ${p.artista} | Ouvinte: ${p.nome} (${p.cidade})</small>
-                    </div>
-                    <div style="display:flex; gap:10px;">
-                        <span style="font-size:11px; color:#444">${p.hora}</span>
-                        <i class="fa-solid fa-trash" onclick="remover(${p.id})" style="cursor:pointer; color:#444"></i>
-                    </div>
-                </div>
-            `).join('') : "<div style='text-align:center; padding:50px; color:#333;'><i class='fa-solid fa-inbox' style='font-size:40px;'></i><br>Nenhum pedido pendente no momento.</div>";
-        }
-
-        function remover(id) {
-            pedidos = pedidos.filter(p => p.id !== id);
-            renderAdmin();
-        }
-
-        function toggleModal(s) { document.getElementById('modalShare').style.display = s ? 'flex' : 'none'; }
-        setInterval(() => { document.getElementById('liveClock').innerText = new Date().toLocaleTimeString(); }, 1000);
-    </script>
 </body>
 </html>
+
