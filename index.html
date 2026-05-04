@@ -264,9 +264,22 @@
             </div>
         </div>
     </footer>
+    <audio id="audioStream" preload="none">
+    <source src="https://conversations-remarkable-grass-chapter.trycloudflare.com/stream" type="audio/mpeg">
+</audio>
+
 
     <script>
-     const audioStream = new Audio('https://conversations-remarkable-grass-chapter.trycloudflare.com/stream');
+const audioStream = document.getElementById('audioStream');
+
+if (audioStream) {
+    audioStream.volume = 0.8;
+    audioStream.crossOrigin = "anonymous";
+
+    audioStream.addEventListener('error', () => {
+        alert("Erro ao conectar ao stream 😢");
+    });
+}
         let pedidos = [];
         let isPlaying = false;
         const MASTER_PASS = "1234";
@@ -280,24 +293,44 @@
             }
         }
 
-        function togglePlay() {
-            const player = document.getElementById('mainPlayer');
-            const icon = document.getElementById('playIcon');
-            const status = document.getElementById('trackStatus');
-            isPlaying = !isPlaying;
+let loading = false;
 
-            if(isPlaying) {
-                player.classList.add('playing-now');
-                icon.className = "fa-solid fa-pause";
-                status.innerText = "Sintonizado ao Vivo - Rádio Palavra Viva";
-                status.style.color = "var(--red-pure)";
-            } else {
-                player.classList.remove('playing-now');
-                icon.className = "fa-solid fa-play";
-                status.innerText = "Pausado - Clique para ouvir";
-                status.style.color = "var(--text-gray)";
-            }
-        }
+function togglePlay() {
+    if (loading) return;
+
+    const player = document.getElementById('mainPlayer');
+    const icon = document.getElementById('playIcon');
+    const status = document.getElementById('trackStatus');
+
+    if (!isPlaying) {
+
+        loading = true;
+
+        audioStream.play()
+        .then(() => {
+            isPlaying = true;
+            loading = false;
+
+            player.classList.add('playing-now');
+            icon.className = "fa-solid fa-pause";
+            status.innerText = "Sintonizado ao Vivo - Rádio Palavra Viva";
+            status.style.color = "var(--red-pure)";
+        })
+        .catch(() => {
+            loading = false;
+            alert("Clique novamente para iniciar o áudio 🔊");
+        });
+
+    } else {
+        audioStream.pause();
+        isPlaying = false;
+
+        player.classList.remove('playing-now');
+        icon.className = "fa-solid fa-play";
+        status.innerText = "Pausado - Clique para ouvir";
+        status.style.color = "var(--text-gray)";
+    }
+}
 
         function enviarPedido() {
             const p = {
