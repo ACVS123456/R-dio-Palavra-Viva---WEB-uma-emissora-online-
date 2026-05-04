@@ -295,9 +295,10 @@ if (audioStream) {
 }
 
 
-let loading = false;
 
 function togglePlay() {
+    console.log("CLICOU NO PLAY"); // 👈 adiciona isso
+
     if (loading) return;
 
     const player = document.getElementById('mainPlayer');
