@@ -312,21 +312,25 @@ function togglePlay() {
        audioStream.src = "https://intend-vegetables-she-counseling.trycloudflare.com/stream";
 audioStream.load(); // 🔥 IMPORTANTE
 
-        audioStream.play()
-        .then(() => {
-            isPlaying = true;
-            loading = false;
+       audioStream.play()
+.then(() => {
+    console.log("TOCANDO ✅"); // 👈 AQUI
 
-            player.classList.add('playing-now');
-            icon.className = "fa-solid fa-pause";
-            status.innerText = "🔴 AO VIVO - Rádio Palavra Viva";
-            status.style.color = "var(--red-pure)";
-        })
-        .catch((err) => {
-            loading = false;
-            console.log(err);
-            alert("⚠️ Toque novamente para iniciar o áudio");
-        });
+    isPlaying = true;
+    loading = false;
+
+    player.classList.add('playing-now');
+    icon.className = "fa-solid fa-pause";
+    status.innerText = "🔴 AO VIVO - Rádio Palavra Viva";
+    status.style.color = "var(--red-pure)";
+})
+.catch((err) => {
+    loading = false;
+
+    console.log("ERRO AO TOCAR ❌:", err); // 👈 AQUI
+
+    alert("⚠️ Toque novamente para iniciar o áudio");
+});
 
     } else {
         audioStream.pause();
