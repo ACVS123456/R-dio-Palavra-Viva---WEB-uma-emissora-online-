@@ -295,6 +295,8 @@ if (audioStream) {
 
 let loading = false;
 
+let loading = false;
+
 function togglePlay() {
     if (loading) return;
 
@@ -303,8 +305,9 @@ function togglePlay() {
     const status = document.getElementById('trackStatus');
 
     if (!isPlaying) {
-
         loading = true;
+
+        audioStream.load(); // 🔥 IMPORTANTE
 
         audioStream.play()
         .then(() => {
@@ -313,12 +316,13 @@ function togglePlay() {
 
             player.classList.add('playing-now');
             icon.className = "fa-solid fa-pause";
-            status.innerText = "Sintonizado ao Vivo - Rádio Palavra Viva";
+            status.innerText = "🔴 AO VIVO - Rádio Palavra Viva";
             status.style.color = "var(--red-pure)";
         })
-        .catch(() => {
+        .catch((err) => {
             loading = false;
-            alert("Clique novamente para iniciar o áudio 🔊");
+            console.log(err);
+            alert("⚠️ Toque novamente para iniciar o áudio");
         });
 
     } else {
@@ -327,11 +331,23 @@ function togglePlay() {
 
         player.classList.remove('playing-now');
         icon.className = "fa-solid fa-play";
-        status.innerText = "Pausado - Clique para ouvir";
+        status.innerText = "Pausado";
         status.style.color = "var(--text-gray)";
     }
 }
+        audioStream.addEventListener('stalled', () => {
+    console.log("Reconectando...");
+    audioStream.load();
+    if (isPlaying) audioStream.play();
+});
 
+audioStream.addEventListener('error', () => {
+    console.log("Erro no stream, tentando reconectar...");
+    setTimeout(() => {
+        audioStream.load();
+        if (isPlaying) audioStream.play();
+    }, 3000);
+});
         function enviarPedido() {
             const p = {
                 id: Date.now(),
