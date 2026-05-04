@@ -264,20 +264,19 @@
             </div>
         </div>
     </footer>
-    <audio id="audioStream" preload="none" playsinline>
-    <source src="https://intend-vegetables-she-counseling.trycloudflare.com/stream" type="audio/mpeg">
+   <audio controls autoplay>
+  <audio id="https://intend-vegetables-she-counseling.trycloudflare.com/stream" preload="none"></audio>
 </audio>
-
-
-    <script>
+<script>
+<script>
 const audioStream = document.getElementById('audioStream');
 let isPlaying = false;
 let loading = false;
+
 if (audioStream) {
     audioStream.volume = 0.8;
     audioStream.crossOrigin = "anonymous";
 
-    // erro + reconexão automática
     audioStream.addEventListener('error', () => {
         console.log("Erro no stream, tentando reconectar...");
         setTimeout(() => {
@@ -286,7 +285,6 @@ if (audioStream) {
         }, 3000);
     });
 
-    // quando trava
     audioStream.addEventListener('stalled', () => {
         console.log("Reconectando...");
         audioStream.load();
@@ -294,7 +292,43 @@ if (audioStream) {
     });
 }
 
+function togglePlay() {
+    const player = document.getElementById('mainPlayer');
+    const icon = document.getElementById('playIcon');
+    const status = document.getElementById('trackStatus');
 
+    if (loading) return;
+
+    if (!isPlaying) {
+        loading = true;
+
+        audioStream.src = "https://intend-vegetables-she-counseling.trycloudflare.com/stream";
+        audioStream.load();
+
+        audioStream.play()
+        .then(() => {
+            isPlaying = true;
+            loading = false;
+
+            player.classList.add('playing-now');
+            icon.className = "fa-solid fa-pause";
+            status.innerText = "🔴 AO VIVO - Rádio Palavra Viva";
+        })
+        .catch(() => {
+            loading = false;
+            alert("Clique novamente para tocar");
+        });
+
+    } else {
+        audioStream.pause();
+        isPlaying = false;
+
+        player.classList.remove('playing-now');
+        icon.className = "fa-solid fa-play";
+        status.innerText = "Pausado";
+    }
+}
+</script>
 
 function togglePlay() {
     console.log("CLICOU NO PLAY"); // 👈 adiciona isso
