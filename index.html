@@ -596,36 +596,64 @@
         </div>
       </div>
     </div>
-    <div class="album-art">
-      <div class="spin-ring" id="spinRing" style="animation-play-state:paused"></div>
-      <i class="fas fa-cross" style="z-index:1"></i>
-    </div>
-  </div
- <div class="hero-title">TV - Palavra Inspirando<br>Vida Online</div>
+<div class="hero-title">TV - Palavra Inspirando<br>Vida Online</div>
 <div class="section-title">Canal proprio nao depende de outros recursos</div>
  <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rádio Palavra Inspirando Viva - WEB</title>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<style>
+body{
+    margin:0;
+    background:#111;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial;
+}
+
+#player{
+    width:100%;
+    max-width:900px;
+    border-radius:10px;
+}
+</style>
 
 </head>
 
 <body>
 
-<video id="video" controls autoplay width="100%"></video>
+<video
+id="player"
+controls
+autoplay
+playsinline
+preload="auto">
+</video>
 
 <script>
 
-var video=document.getElementById('video');
+const video=document.getElementById("player");
+
+const stream="http://192.168.0.105/hls/radio.m3u8";
 
 if(Hls.isSupported()){
 
-var hls=new Hls();
+    const hls=new Hls();
 
-hls.loadSource('/hls/radio.m3u8');
+    hls.loadSource(stream);
 
-hls.attachMedia(video);
+    hls.attachMedia(video);
+
+}else if(video.canPlayType("application/vnd.apple.mpegurl")){
+
+    video.src=stream;
 
 }
 
@@ -633,8 +661,13 @@ hls.attachMedia(video);
 
 </body>
 </html>
-
-  <!-- NOW PLAYING -->
+    <div class="album-art">
+      <div class="spin-ring" id="spinRing" style="animation-play-state:paused"></div>
+      <i class="fas fa-cross" style="z-index:1"></i>
+    </div>
+  </div
+ 
+<!-- NOW PLAYING -->
   <div class="now-playing">
     <div class="now-playing-icon"><i class="fas fa-music"></i></div>
     <div class="np-info">
