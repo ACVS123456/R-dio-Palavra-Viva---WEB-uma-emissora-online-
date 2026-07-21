@@ -764,7 +764,36 @@
     <i class="fas fa-volume-high vol-icon"></i>
   </div>
 </div>
+<!DOCTYPE html>
+<html>
+<head>
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+</head>
+
+<body>
+
+<video id="video" controls autoplay width="100%"></video>
+
+<script>
+
+var video=document.getElementById('video');
+
+if(Hls.isSupported()){
+
+var hls=new Hls();
+
+hls.loadSource('/hls/radio.m3u8');
+
+hls.attachMedia(video);
+
+}
+
+</script>
+
+</body>
+</html>
 <audio id="audio">
   <source src="https://stream-160.zeno.fm/00mtx3p0338uv"
 </audio>
@@ -884,3 +913,4 @@ function carregarPedidos() {
 </script>
 </body>
 </html>
+
