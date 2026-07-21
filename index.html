@@ -587,10 +587,10 @@
           <div class="stat-label">No ar</div>
         </div>
         <div class="stat">
-          <p id="ouvintes">⚫️ Parado: 0</p>
+          <p id="ouvintes"> 0 </p>
           <div class="stat-label">Ouvindo</div>
         </div>
-        <span class="stat-ouvintes-count"></span>
+        <div class="stat-label"></div>
           <div class="stat-value">3</div>
           <div class="stat-label">Programas</div>
         </div>
@@ -901,7 +901,7 @@ function carregarPedidos() {
    /* CONTADOR OUVINTES */
 setInterval(()=>{
 document.getElementById("ouvintes").innerText=
-"🟡 Ouvintes: " + Math.floor(Math.random()*200);
+" Ouvintes: " + Math.floor(Math.random()*200);
 },3000);
   }
  
