@@ -621,62 +621,33 @@
   </div>
 <div class="hero-title">TV - Palavra Inspirando<br>Vida Online</div>
 <div class="section-title">Canal proprio nao depende de outros recursos</div>
- <!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rádio Palavra Inspirando Viva - WEB</title>
-
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-<style>
-body{
-    margin:0;
-    background:#111;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    font-family:Arial;
-}
-
-#player{
-    width:100%;
-    max-width:900px;
-    border-radius:10px;
-}
-</style>
-
 </head>
 
 <body>
 
-<video
-id="player"
-controls
-autoplay
-playsinline
-preload="auto">
-</video>
+<video id="video" controls autoplay width="100%"></video>
 
 <script>
 
-const video=document.getElementById("player");
+var video = document.getElementById("video");
+var stream = "http://192.168.0.105/hls/radio.m3u8";
 
-const stream="http://192.168.0.105/hls/radio.m3u8";
+if (Hls.isSupported()) {
 
-if(Hls.isSupported()){
-
-    const hls=new Hls();
+    var hls = new Hls();
 
     hls.loadSource(stream);
 
     hls.attachMedia(video);
 
-}else if(video.canPlayType("application/vnd.apple.mpegurl")){
+} else if (video.canPlayType("application/vnd.apple.mpegurl")) {
 
-    video.src=stream;
+    video.src = stream;
 
 }
 
