@@ -575,18 +575,18 @@
 <div class="main">
 
   <!-- HERO -->
-   <div class="hero">
+  <div class="hero">
     <div>
       <div class="hero-label">Música Gospel 24h</div>
       <div class="hero-title">A Palavra que<br>Transforma Vidas</div>
-      <div class="hero-subtitle">Louvores, adoração e mensagens bíblicas que fortalecem a sua fé todos os dias, a qualquer hora. Aguarde 5 seg para iniciar e tualize a pagina se falhar a transmissao</div>
+      <div class="hero-subtitle">Louvores, adoração e mensagens bíblicas que fortalecem a sua fé todos os dias, a qualquer hora.</div>
       <div class="hero-stats">
         <div class="stat">
           <div class="stat-value">24h</div>
           <div class="stat-label">No ar</div>
         </div>
         <div class="stat">
-          <div class="stat-value" id="ouvintes-count"></div>
+          <div class="stat-value" id="ouvintes-count">—</div>
           <div class="stat-label">Ouvindo</div>
         </div>
         <div class="stat">
@@ -600,17 +600,16 @@
       <i class="fas fa-cross" style="z-index:1"></i>
     </div>
   </div>
- 
-<!-- NOW PLAYING -->
+
+  <!-- NOW PLAYING -->
   <div class="now-playing">
     <div class="now-playing-icon"><i class="fas fa-music"></i></div>
     <div class="np-info">
       <div class="np-tag">Tocando agora</div>
-      <div class="np-title" id="npTitle">Aguardando transmissã-- </div>
-      <div class="np-sub" id="npSub">Clique em Play abaixo para ouvir</div>
+      <div class="np-title" id="npTitle">Aguardando transmissão…</div>
+      <div class="np-sub" id="npSub">Clique em Play para ouvir</div>
     </div>
-   
-   <div class="waveform paused" id="waveform">
+    <div class="waveform paused" id="waveform">
       <div class="wave-bar"></div>
       <div class="wave-bar"></div>
       <div class="wave-bar"></div>
@@ -619,7 +618,6 @@
       <div class="wave-bar"></div>
     </div>
   </div>
-
 
   <!-- INFO CARDS -->
   <div class="section-title">Sobre a rádio</div>
@@ -727,11 +725,11 @@
   <div id="about" class="tab-panel">
     <div class="about-card">
       <h3>Radio Palavra Inspirando Vida - WEB</h3>
-      <p>E um canal digital dedicado a levar a mensagem de fé, esperança e transformação através da música e da Palavra de Deus. Com programação 24 horas ininterruptas, transmitimos louvores, adoração, mensagens bíblicas e conteúdos inspiradores que fortalecem a sua fé em qualquer momento do dia.</p>
+      <p>Radio Palavra Inspirando Vida - WEB Web é um canal digital dedicado a levar a mensagem de fé, esperança e transformação através da música e da Palavra de Deus. Com programação 24 horas ininterruptas, transmitimos louvores, adoração, mensagens bíblicas e conteúdos inspiradores que fortalecem a sua fé em qualquer momento do dia.</p>
       <br>
       <p>Nossa missão é alcançar corações por meio da música gospel, desde os clássicos imortais até os lançamentos mais recentes, sempre com qualidade e comprometimento com a fé cristã.</p>
       <br>
-      <p style="font-size:12px;color:var(--muted);">A transmissão é gratuita e pode ser acompanhada por qualquer dispositivo com acesso à internet. Compartilhe com seus amigos e familiares E Sintonize e deixe a Palavra transformar o seu dia.</p>
+      <p style="font-size:12px;color:var(--muted);">A transmissão é gratuita e pode ser acompanhada por qualquer dispositivo com acesso à internet. Sintonize e deixe a Palavra transformar o seu dia.</p>
     </div>
   </div>
 
@@ -765,10 +763,41 @@
     <i class="fas fa-volume-high vol-icon"></i>
   </div>
 </div>
+
 <audio id="audio">
-  <source src="https://stream-160.zeno.fm/00mtx3p0338uv"
+  <source src="https://stream-160.zeno.fm/00mtx3p0338u">
 </audio>
 
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+</head>
+
+<body>
+
+<video id="video" controls autoplay width="100%"></video>
+
+<script>
+
+var video=document.getElementById('video');
+
+if(Hls.isSupported()){
+
+var hls=new Hls();
+
+hls.loadSource('/hls/radio.m3u8');
+
+hls.attachMedia(video);
+
+}
+
+</script>
+
+</body>
+</html>
 <script>
 const audio = document.getElementById('audio');
 const playBtn = document.getElementById('playBtn');
@@ -787,7 +816,7 @@ function togglePlay() {
     document.getElementById('playerStatus').textContent = '🔴 Ao Vivo · Transmitindo';
     document.getElementById('liveBadge').style.display = 'flex';
     document.getElementById('npTitle').textContent = 'Transmissão ao vivo';
-    document.getElementById('npSub').textContent = 'Rádio Palavra Inspirando Vida - WEB · Gospel 24h';
+    document.getElementById('npSub').textContent = 'Rádio Palavra Inspirando vida - WEB · Gospel 24h';
     document.getElementById('ouvintes-count').textContent = '—';
     document.getElementById('waveform').classList.remove('paused');
     document.getElementById('spinRing').style.animationPlayState = 'running';
@@ -870,7 +899,8 @@ function carregarPedidos() {
   if (!pedidos.length) {
     lista.innerHTML = '<div class="admin-empty"><i class="fas fa-inbox" style="display:block;font-size:28px;margin-bottom:8px;"></i>Nenhum pedido ainda</div>';
     return;
-   lista.innerHTML = pedidos.map(p => `
+  }
+  lista.innerHTML = pedidos.map(p => `
     <div class="request-item">
       <div class="request-avatar">${p.n.charAt(0).toUpperCase()}</div>
       <div>
@@ -883,4 +913,3 @@ function carregarPedidos() {
 </script>
 </body>
 </html>
-
