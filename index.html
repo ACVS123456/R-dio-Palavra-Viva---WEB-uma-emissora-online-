@@ -772,34 +772,65 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Rádio Palavra Inspirando Viva - WEB</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV WEB</title>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+video{
+    width:100%;
+    max-width:900px;
+    background:#000;
+}
+</style>
 
 </head>
 
 <body>
 
-<video id="video" controls autoplay width="100%"></video>
+<video
+id="video"
+controls
+autoplay
+muted
+playsinline>
+</video>
 
 <script>
 
-const video = document.getElementById("video");
+const video=document.getElementById("video");
 
-// ALTERE O IP PARA O IP DO SEU UBUNTU
-const stream = "http://192.168.0.105/hls/radio.m3u8";
+if(Hls.isSupported()){
 
-if (Hls.isSupported()) {
+    const hls=new Hls({
+        liveDurationInfinity:true
+    });
 
-    const hls = new Hls();
-
-    hls.loadSource(stream);
+   hls.loadSource("http://192.168.190.128/hls/radio.m3u8");
 
     hls.attachMedia(video);
 
-} else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    hls.on(Hls.Events.MANIFEST_PARSED,function(){
+        video.play();
+    });
 
-    video.src = stream;
+}else if(video.canPlayType('application/vnd.apple.mpegurl')){
+
+    video.src="/hls/radio.m3u8";
+
+    video.addEventListener("loadedmetadata",function(){
+        video.play();
+    });
 
 }
 
