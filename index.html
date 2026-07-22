@@ -765,12 +765,14 @@
 </div>
 
 <audio id="audio">
-  <source src="https://stream-160.zeno.fm/00mtx3p0338u">
+  <source src="https://stream.zeno.fm/00mtx3p0338uv">
 </audio>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+<meta charset="UTF-8">
+<title>Rádio Palavra Inspirando Viva - WEB</title>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
@@ -782,15 +784,22 @@
 
 <script>
 
-var video=document.getElementById('video');
+const video = document.getElementById("video");
 
-if(Hls.isSupported()){
+// ALTERE O IP PARA O IP DO SEU UBUNTU
+const stream = "http://192.168.0.105/hls/radio.m3u8";
 
-var hls=new Hls();
+if (Hls.isSupported()) {
 
-hls.loadSource('/hls/radio.m3u8');
+    const hls = new Hls();
 
-hls.attachMedia(video);
+    hls.loadSource(stream);
+
+    hls.attachMedia(video);
+
+} else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+
+    video.src = stream;
 
 }
 
