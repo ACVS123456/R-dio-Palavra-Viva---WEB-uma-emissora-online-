@@ -609,47 +609,8 @@
       <div class="np-title" id="npTitle">Aguardando transmissã-- </div>
       <div class="np-sub" id="npSub">Clique em Play abaixo para ouvir</div>
     </div>
-
-   <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Rádio Palavra Inspirando Viva - WEB</title>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-</head>
-
-<body>
-
-<video id="video" controls autoplay width="100%"></video>
-
-<script>
-
-const video = document.getElementById("video");
-
-// ALTERE O IP PARA O IP DO SEU UBUNTU
-const stream = "http://192.168.0.105/hls/radio.m3u8";
-
-if (Hls.isSupported()) {
-
-    const hls = new Hls();
-
-    hls.loadSource(stream);
-
-    hls.attachMedia(video);
-
-} else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-
-    video.src = stream;
-
-}
-
-</script>
-
-</body>
-</html>
-    <div class="waveform paused" id="waveform">
+   
+   <div class="waveform paused" id="waveform">
       <div class="wave-bar"></div>
       <div class="wave-bar"></div>
       <div class="wave-bar"></div>
