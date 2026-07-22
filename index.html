@@ -587,7 +587,7 @@
           <div class="stat-label">No ar</div>
         </div>
         <div class="stat">
-         <div id="ouvintes-value"></div>
+         <div id="ouvintes-label"></div>
           <div class="stat-value">ouvindo</div>
         </div>
         <div class="stat-label"></div>
@@ -904,16 +904,7 @@ function carregarPedidos() {
   if (!pedidos.length) {
     lista.innerHTML = '<div class="admin-empty"><i class="fas fa-inbox" style="display:block;font-size:28px;margin-bottom:8px;"></i>Nenhum pedido ainda</div>';
     return;
-   
-   /* CONTADOR OUVINTES */
-   
-setInterval(()=>{
-document.getElementById("ouvintes").innerText=
-" 🟢ouvintes: " + Math.floor(Math.random()*200);
-},3000);
-  }
- 
-  lista.innerHTML = pedidos.map(p => `
+   lista.innerHTML = pedidos.map(p => `
     <div class="request-item">
       <div class="request-avatar">${p.n.charAt(0).toUpperCase()}</div>
       <div>
