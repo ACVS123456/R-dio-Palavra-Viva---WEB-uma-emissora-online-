@@ -571,6 +571,68 @@
   </div>
 </header>
 
+  <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV WEB</title>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<style>
+
+video{
+    width:100%;
+    max-width:900px;
+    background:#000;
+}
+</style>
+
+</head>
+
+<body>
+
+<video
+id="video"
+controls
+autoplay
+muted
+playsinline>
+</video>
+
+<script>
+
+const video=document.getElementById("video");
+
+if(Hls.isSupported()){
+
+    const hls=new Hls({
+        liveDurationInfinity:true
+    });
+
+   hls.loadSource("http://192.168.190.128/hls/radio.m3u8");
+
+    hls.attachMedia(video);
+
+    hls.on(Hls.Events.MANIFEST_PARSED,function(){
+        video.play();
+    });
+
+}else if(video.canPlayType('application/vnd.apple.mpegurl')){
+
+    video.src="/hls/radio.m3u8";
+
+    video.addEventListener("loadedmetadata",function(){
+        video.play();
+    });
+
+}
+
+</script>
+
+</body>
+</html>
 <!-- MAIN -->
 <div class="main">
 
@@ -768,68 +830,6 @@
   <source src="https://stream.zeno.fm/00mtx3p0338uv">
 </audio>
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TV WEB</title>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-<style>
-
-video{
-    width:100%;
-    max-width:900px;
-    background:#000;
-}
-</style>
-
-</head>
-
-<body>
-
-<video
-id="video"
-controls
-autoplay
-muted
-playsinline>
-</video>
-
-<script>
-
-const video=document.getElementById("video");
-
-if(Hls.isSupported()){
-
-    const hls=new Hls({
-        liveDurationInfinity:true
-    });
-
-   hls.loadSource("http://192.168.190.128/hls/radio.m3u8");
-
-    hls.attachMedia(video);
-
-    hls.on(Hls.Events.MANIFEST_PARSED,function(){
-        video.play();
-    });
-
-}else if(video.canPlayType('application/vnd.apple.mpegurl')){
-
-    video.src="/hls/radio.m3u8";
-
-    video.addEventListener("loadedmetadata",function(){
-        video.play();
-    });
-
-}
-
-</script>
-
-</body>
-</html>
 <script>
 const audio = document.getElementById('audio');
 const playBtn = document.getElementById('playBtn');
@@ -837,7 +837,7 @@ const playIcon = document.getElementById('playIcon');
 const vol = document.getElementById('vol');
 let playing = false;
 
-audio.volume = 0.6;
+audio.volume = 0.10;
 vol.oninput = () => audio.volume = vol.value;
 
 function togglePlay() {
