@@ -583,8 +583,8 @@
 
 <style>
 video{
-    width:50%;
-    max-width:900px;
+    width:100%;
+    max-width:1000px;
     background:#000;
 }
 </style>
@@ -615,7 +615,7 @@ if(Hls.isSupported()){
 
     hls.attachMedia(video);
 
-   hls.loadSource("http://192.168.190.128/hls/radio.m3u8");
+   hls.loadSource("http://192.168.5.0/live/hls/radio.m3u8");
     });
 
 }else if(video.canPlayType('application/vnd.apple.mpegurl')){
