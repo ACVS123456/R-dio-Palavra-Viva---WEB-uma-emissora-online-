@@ -586,7 +586,7 @@
           <div class="stat-label">No ar</div>
         </div>
         <div class="stat">
-          <span class="stat-value" id="ouvintes-count"></span>
+          <span class="stat-value" id="ouvintes-count">1</span>
           <div class="stat-label">Ouvindo</div>
         </div>
         <div class="stat">
@@ -605,7 +605,7 @@
   <div class="now-playing">
     <div class="now-playing-icon"><i class="fas fa-music"></i></div>
     <div class="np-info">
-     <div class="live-dot"></div> Ao Vivo</div>
+     <div class="live-dot"></div> Ao Vivo
       <div class="np-tag">Tocando agora</div><br>
      <div class="np-title" id="npTitle">Aguardando transmissão…</div>
       <div class="np-sub" id="npSub">Clique em Play para ouvir</div>
@@ -793,7 +793,7 @@ function togglePlay() {
     document.getElementById('liveBadge').style.display = 'flex';
     document.getElementById('npTitle').textContent = 'Transmissão ao vivo';
     document.getElementById('npSub').textContent = 'Rádio Palavra Inspirando vida - WEB · Gospel 24h';
-    document.getElementById('ouvintes-count').textContent = '01.100';
+    document.getElementById('ouvintes-count').textContent = '0';
     document.getElementById('waveform').classList.remove('paused');
     document.getElementById('spinRing').style.animationPlayState = 'running';
   } else {
