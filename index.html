@@ -887,5 +887,58 @@ function carregarPedidos() {
   `).join('');
 }
 </script>
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Status Icecast</title>
+<style>
+body{
+    background:#111;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+.card{
+    max-width:500px;
+    margin:30px auto;
+    padding:20px;
+    border-radius:10px;
+    background:#222;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Rádio Online</h2>
+    <p><strong>Ouvintes:</strong> <span id="listeners">0</span></p>
+    <p><strong>Pico:</strong> <span id="peak">0</span></p>
+    <p><strong>Tocando:</strong> <span id="title">Carregando...</span></p>
+</div>
+
+<script>
+function atualizar(){
+    fetch("http://localhost:8000/status-json.xsl")
+    .then(r=>r.json())
+    .then(data=>{
+        let src=data.icestats.source;
+
+        if(Array.isArray(src)){
+            src=src.find(s=>s.listenurl && s.listenurl.includes("/stream"));
+        }
+
+        document.getElementById("listeners").innerText=src.listeners;
+        document.getElementById("peak").innerText=src.listener_peak;
+        document.getElementById("title").innerText=src.title;
+    });
+}
+
+atualizar();
+setInterval(atualizar,5000);
+</script>
+
 </body>
+</html>
+</body>
+ 
 </html>
