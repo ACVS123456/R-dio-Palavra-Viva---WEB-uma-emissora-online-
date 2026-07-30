@@ -940,38 +940,6 @@ document.addEventListener("visibilitychange", async () => {
     }
 });
 </script>
-
-</body>
-</html>
- <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Status Icecast</title>
-<style>
-body{
-    background:#111;
-    color:#fff;
-    font-family:Arial,sans-serif;
-}
-.card{
-    max-width:500px;
-    margin:30px auto;
-    padding:20px;
-    border-radius:10px;
-    background:#222;
-}
-</style>
-</head>
-<body>
-
-<div class="card">
-    <h2>Rádio Online</h2>
-    <p><strong>Ouvintes:</strong> <span id="listeners">0</span></p>
-    <p><strong>Pico:</strong> <span id="peak">0</span></p>
-    <p><strong>Tocando:</strong> <span id="title">Carregando...</span></p>
-</div>
-
 <script>
 function atualizar() {
 
@@ -999,24 +967,26 @@ function atualizar() {
 
             document.getElementById("listeners").textContent = src.listeners || 0;
             document.getElementById("peak").textContent = src.listener_peak || 0;
-            document.getElementById("title").textContent = src.title || src.server_name || "Sem título";
+            document.getElementById("title").textContent =
+                src.title || src.server_name || "Sem título";
 
         })
         .catch(error => {
-            console.error(error);
+            console.error("Erro:", error);
+            document.getElementById("listeners").textContent = "0";
+            document.getElementById("peak").textContent = "0";
             document.getElementById("title").textContent = "Erro ao obter dados";
         });
-
 }
 
 atualizar();
 setInterval(atualizar, 5000);
 </script>
+</body>
+</html>
+ 
+
 
  
 
-</body>
-</html>
-</body>
  
-</html>
