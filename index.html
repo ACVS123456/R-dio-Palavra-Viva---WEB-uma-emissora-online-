@@ -771,6 +771,52 @@
   </div>
 </div>
 
+ <div id="speaker" class="speaker">🔊</div>
+
+<style>
+.speaker{
+    font-size:70px;
+    display:inline-block;
+}
+
+.speaker.playing{
+    animation:vibrar .12s infinite alternate;
+}
+
+@keyframes vibrar{
+    0%{
+        transform:translateX(-3px) rotate(-8deg) scale(1);
+    }
+    50%{
+        transform:translateX(3px) rotate(8deg) scale(1.08);
+    }
+    100%{
+        transform:translateX(-3px) rotate(-8deg) scale(1);
+    }
+}
+</style>
+
+<audio id="player" controls>
+    <source src="https://oven-quad-karl-queue.trycloudflare.com/stream" type="audio/mpeg">
+</audio>
+
+<script>
+const audio=document.getElementById("player");
+const speaker=document.getElementById("speaker");
+
+audio.addEventListener("play",()=>{
+    speaker.classList.add("playing");
+});
+
+audio.addEventListener("pause",()=>{
+    speaker.classList.remove("playing");
+});
+
+audio.addEventListener("ended",()=>{
+    speaker.classList.remove("playing");
+});
+</script>
+
 <audio id="audio">
   <source src="https://oven-quad-karl-queue.trycloudflare.com/stream">
 </audio>
