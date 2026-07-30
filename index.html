@@ -522,6 +522,34 @@
     justify-content: flex-end;
   }
 
+ 
+
+
+.speaker{
+    font-size:70px;
+    display:inline-block;
+}
+
+.speaker.playing{
+    animation:vibrar .12s infinite alternate;
+}
+
+@keyframes vibrar{
+    0%{
+        transform:translateX(-3px) rotate(-8deg) scale(1);
+    }
+    50%{
+        transform:translateX(3px) rotate(8deg) scale(1.08);
+    }
+    100%{
+        transform:translateX(-3px) rotate(-8deg) scale(1);
+    }
+}
+
+
+
+ 
+
   .vol-icon { color: var(--muted); font-size: 13px; }
   #vol { width: 80px; accent-color: var(--green); }
 
