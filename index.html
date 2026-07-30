@@ -800,10 +800,9 @@
 </div>
 
 
-
+<div id="speaker" class="speaker">🔊</div>
 <audio id="audio">
- <div id="speaker" class="speaker">🔊</div>
-  <source src="https://oven-quad-karl-queue.trycloudflare.com/stream">
+<source src="https://oven-quad-karl-queue.trycloudflare.com/stream">
 </audio>
 
 <script>
@@ -813,7 +812,7 @@ const playIcon = document.getElementById('playIcon');
 const vol = document.getElementById('vol');
 let playing = false;
 
-audio.volume = 0.10;
+audio.volume = 0.20;
 vol.oninput = () => audio.volume = vol.value;
 
 function togglePlay() {
@@ -825,7 +824,7 @@ function togglePlay() {
     document.getElementById('liveBadge').style.display = 'flex';
     document.getElementById('npTitle').textContent = 'Transmissão ao vivo';
     document.getElementById('npSub').textContent = 'Rádio Palavra Inspirando vida - WEB · Gospel 24h';
-    document.getElementById('ouvintes-count') .textContent = 'ouvindo';
+    document.getElementById('ouvintes-count') .textContent = '🟠 ouvindo';
     document.getElementById('waveform').classList.remove('paused');
     document.getElementById('spinRing').style.animationPlayState = 'running';
   } else {
