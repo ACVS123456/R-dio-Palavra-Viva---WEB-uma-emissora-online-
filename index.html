@@ -793,7 +793,9 @@
   </div>
 </div>
 
- <div id="speaker" class="speaker">🔊</div>
+
+ 
+
 
 <style>
 .speaker{
@@ -818,26 +820,7 @@
 }
 </style>
 
-<audio id="player" controls>
-    <source src="https://oven-quad-karl-queue.trycloudflare.com/stream" type="audio/mpeg">
-</audio>
-
-<script>
-const audio=document.getElementById("player");
-const speaker=document.getElementById("speaker");
-
-audio.addEventListener("play",()=>{
-    speaker.classList.add("playing");
-});
-
-audio.addEventListener("pause",()=>{
-    speaker.classList.remove("playing");
-});
-
-audio.addEventListener("ended",()=>{
-    speaker.classList.remove("playing");
-});
-</script>
+ <div id="speaker" class="speaker">🔊</div>
 
 <audio id="audio">
   <source src="https://oven-quad-karl-queue.trycloudflare.com/stream">
