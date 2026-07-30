@@ -574,29 +574,7 @@
 <!-- MAIN -->
 <div class="main">
 
- 
-<div class="radio-player">
-
-<div id="live">● AO VIVO</div>
-
-<div id="speaker">
-    <div class="cone"></div>
-    <span class="wave w1"></span>
-    <span class="wave w2"></span>
-    <span class="wave w3"></span>
-</div>
-
-<div class="equalizer">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
-
-</div>
- 
-  <!-- HERO -->
+ <!-- HERO -->
   <div class="hero">
     <div>
       <div class="hero-label">Música Gospel 24h</div>
@@ -794,35 +772,9 @@
 </div>
 
 
- 
-
-
-<style>
-.speaker{
-    font-size:70px;
-    display:inline-block;
-}
-
-.speaker.playing{
-    animation:vibrar .12s infinite alternate;
-}
-
-@keyframes vibrar{
-    0%{
-        transform:translateX(-3px) rotate(-8deg) scale(1);
-    }
-    50%{
-        transform:translateX(3px) rotate(8deg) scale(1.08);
-    }
-    100%{
-        transform:translateX(-3px) rotate(-8deg) scale(1);
-    }
-}
-</style>
-
- <div id="speaker" class="speaker">🔊</div>
 
 <audio id="audio">
+ <div id="speaker" class="speaker">🔊</div>
   <source src="https://oven-quad-karl-queue.trycloudflare.com/stream">
 </audio>
 
@@ -1014,6 +966,21 @@ atualizar();
 setInterval(atualizar,5000);
 </script>
 
+ 
+<script>
+
+#speaker.playing{
+    animation:vibrar 0.15s infinite linear;
+}
+
+@keyframes vibrar{
+    0%{transform:translateX(-2px) scale(1);}
+    25%{transform:translateX(2px) scale(1.05);}
+    50%{transform:translateX(-2px) scale(1.10);}
+    75%{transform:translateX(2px) scale(1.05);}
+    100%{transform:translateX(-2px) scale(1);}
+}
+</script>
 </body>
 </html>
 </body>
