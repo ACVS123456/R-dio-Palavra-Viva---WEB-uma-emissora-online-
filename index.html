@@ -973,24 +973,44 @@ body{
 </div>
 
 <script>
-function atualizar(){
-    fetch("https://oven-quad-karl-queue.trycloudflare.com/stream")
-    .then(r=>r.json())
-    .then(data=>{
-        let src=data.icestats.source;
+function atualizar() {
 
-        if(Array.isArray(src)){
-            src=src.find(s=>s.listenurl && s.listenurl.includes("https://oven-quad-karl-queue.trycloudflare.com/stream"));
-        }
+    fetch("https://oven-quad-karl-queue.trycloudflare.com/status-json.xsl")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Erro HTTP: " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
 
-        document.getElementById("listeners").innerText=src.listeners;
-        document.getElementById("peak").innerText=src.listener_peak;
-        document.getElementById("title").innerText=src.title;
-    });
+            let src = data.icestats.source;
+
+            if (Array.isArray(src)) {
+                src = src.find(s => s.listenurl && s.listenurl.includes("/stream"));
+            }
+
+            if (!src) {
+                document.getElementById("listeners").textContent = "0";
+                document.getElementById("peak").textContent = "0";
+                document.getElementById("title").textContent = "Stream não encontrada";
+                return;
+            }
+
+            document.getElementById("listeners").textContent = src.listeners || 0;
+            document.getElementById("peak").textContent = src.listener_peak || 0;
+            document.getElementById("title").textContent = src.title || src.server_name || "Sem título";
+
+        })
+        .catch(error => {
+            console.error(error);
+            document.getElementById("title").textContent = "Erro ao obter dados";
+        });
+
 }
 
 atualizar();
-setInterval(atualizar,5000);
+setInterval(atualizar, 5000);
 </script>
 
  
