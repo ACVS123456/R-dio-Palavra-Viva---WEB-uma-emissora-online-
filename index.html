@@ -165,6 +165,30 @@
   .stat-value { font-size: 20px; font-weight: 700; color: var(--green); }
   .stat-label { font-size: 11px; color: var(--muted); }
 
+  /* ── ANIMAÇÃO DO ALTO-FALANTE VIBRANDO ── */
+  .speaker {
+    font-size: 28px;
+    display: inline-block;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+  }
+
+  .speaker.vibrating {
+    animation: speakerPulse 0.3s ease-in-out infinite alternate;
+  }
+
+  @keyframes speakerPulse {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.18) rotate(-4deg);
+    }
+    100% {
+      transform: scale(1.25) rotate(4deg);
+    }
+  }
+
   /* ── ALBUM ART / VISUAL ── */
   .album-art {
     width: 140px;
@@ -198,6 +222,7 @@
     border-top-color: var(--green);
     border-radius: 50%;
     animation: spin 3s linear infinite;
+    animation-play-state: paused;
   }
 
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -575,188 +600,52 @@
 <div class="main">
 
   <!-- HERO -->
- <div class="main">
-
-
-
-<!-- HERO -->
-
-
-<section class="hero">
-
-
-<div>
-
-
-<div class="hero-label">
-
-Música Gospel 24h
-
-</div>
-
-
-
-<div id="speaker" class="speaker">
-
-🔊
-
-</div>
-
-
-
-<h1 class="hero-title">
-
-A Palavra que<br>
-
-Transforma Vidas
-
-</h1>
-
-
-
-<p class="hero-subtitle">
-
-Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias.
-
-</p>
-
-
-
-<div class="hero-stats">
-
-
-<div>
-
-<div class="stat-value">
-24h
-</div>
-
-<div class="stat-label">
-No ar
-</div>
-
-</div>
-
-
-
-<div>
-
-<div class="stat-value" id="ouvintes-count">
-20
-</div>
-
-<div class="stat-label">
-Ouvindo
-</div>
-
-</div>
-
-
-
-<div>
-
-<div class="stat-value">
-3
-</div>
-
-<div class="stat-label">
-Programas
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="album-art">
-
-
-<div class="spin-ring" id="spinRing"></div>
-
-
-<i class="fas fa-cross"></i>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-<!-- AGORA TOCANDO -->
-
-
-<div class="now-playing">
-
-
-<div class="now-playing-icon">
-
-<i class="fas fa-music"></i>
-
-</div>
-
-
-
-<div class="np-info">
-
-
-<div class="np-tag">
-
-Tocando agora
-
-</div>
-
-
-<div class="np-title" id="npTitle">
-
-Aguardando transmissão...
-
-</div>
-
-
-
-<div class="np-sub" id="npSub">
-
-Clique em Play para ouvir
-
-</div>
-
-
-</div>
-
-
-
-
-<div class="waveform paused" id="waveform">
-
-
-<div class="wave-bar"></div>
-<div class="wave-bar"></div>
-<div class="wave-bar"></div>
-<div class="wave-bar"></div>
-<div class="wave-bar"></div>
-
-
-</div>
-
-
-</div>
-
-
+  <section class="hero">
+    <div>
+      <div class="hero-label">Música Gospel 24h</div>
+      <div id="speaker" class="speaker">🔊</div>
+      <h1 class="hero-title">A Palavra que<br>Transforma Vidas</h1>
+      <p class="hero-subtitle">Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias.</p>
+
+      <div class="hero-stats">
+        <div>
+          <div class="stat-value">24h</div>
+          <div class="stat-label">No ar</div>
+        </div>
+        <div>
+          <div class="stat-value" id="ouvintes-count">20</div>
+          <div class="stat-label">Ouvindo</div>
+        </div>
+        <div>
+          <div class="stat-value">3</div>
+          <div class="stat-label">Programas</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="album-art">
+      <div class="spin-ring" id="spinRing"></div>
+      <i class="fas fa-cross"></i>
+    </div>
+  </section>
+
+  <!-- AGORA TOCANDO -->
+  <div class="now-playing">
+    <div class="now-playing-icon">
+      <i class="fas fa-music"></i>
+    </div>
+    <div class="np-info">
+      <div class="np-tag">Tocando agora</div>
+      <div class="np-title" id="npTitle">Aguardando transmissão...</div>
+      <div class="np-sub" id="npSub">Clique em Play para ouvir</div>
+    </div>
+    <div class="waveform paused" id="waveform">
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+    </div>
   </div>
 
   <!-- INFO CARDS -->
@@ -869,7 +758,7 @@ Clique em Play para ouvir
     </div>
   </div>
 
-  <!-- ADMIN PANEL TAB (hidden until login) -->
+  <!-- ADMIN PANEL TAB -->
   <div id="adminPanel" class="tab-panel">
     <div class="admin-card">
       <div class="section-title" style="margin-bottom:16px;">Pedidos recebidos</div>
@@ -909,6 +798,7 @@ const audio = document.getElementById('audio');
 const playBtn = document.getElementById('playBtn');
 const playIcon = document.getElementById('playIcon');
 const vol = document.getElementById('vol');
+const speaker = document.getElementById('speaker');
 let playing = false;
 
 audio.volume = 0.6;
@@ -926,6 +816,9 @@ function togglePlay() {
     document.getElementById('ouvintes-count').textContent = '—';
     document.getElementById('waveform').classList.remove('paused');
     document.getElementById('spinRing').style.animationPlayState = 'running';
+    
+    /* Liga a vibração do alto-falante */
+    speaker.classList.add('vibrating');
   } else {
     audio.pause();
     playing = false;
@@ -936,6 +829,9 @@ function togglePlay() {
     document.getElementById('npSub').textContent = 'Clique em Play para ouvir';
     document.getElementById('waveform').classList.add('paused');
     document.getElementById('spinRing').style.animationPlayState = 'paused';
+    
+    /* Desliga a vibração do alto-falante */
+    speaker.classList.remove('vibrating');
   }
 }
 
@@ -949,7 +845,10 @@ function updateClock() {
 
   /* Highlight schedule slot */
   const hr = now.getHours();
-  ['slot1','slot2','slot3'].forEach(id => document.getElementById(id).classList.remove('active-slot'));
+  ['slot1','slot2','slot3'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.remove('active-slot');
+  });
   let activeSlot = null;
   if (hr < 8) activeSlot = 'slot1';
   else if (hr < 13) activeSlot = 'slot2';
@@ -957,9 +856,14 @@ function updateClock() {
 
   if (activeSlot) {
     const el = document.getElementById(activeSlot);
-    el.classList.add('active-slot');
-    el.querySelector('.schedule-badge').className = 'schedule-badge badge-live';
-    el.querySelector('.schedule-badge').textContent = 'Agora';
+    if(el) {
+      el.classList.add('active-slot');
+      const badge = el.querySelector('.schedule-badge');
+      if(badge) {
+        badge.className = 'schedule-badge badge-live';
+        badge.textContent = 'Agora';
+      }
+    }
   }
 }
 setInterval(updateClock, 1000);
