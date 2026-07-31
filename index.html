@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio Palavra Inspirando Vida - WEB</title>
+<title>Rádio Palavra Viva</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -522,34 +522,6 @@
     justify-content: flex-end;
   }
 
- 
-
-
-.speaker{
-    font-size:70px;
-    display:inline-block;
-}
-
-.speaker.playing{
-    animation:vibrar .12s infinite alternate;
-}
-
-@keyframes vibrar{
-    0%{
-        transform:translateX(-3px) rotate(-8deg) scale(1);
-    }
-    50%{
-        transform:translateX(3px) rotate(8deg) scale(1.08);
-    }
-    100%{
-        transform:translateX(-3px) rotate(-8deg) scale(1);
-    }
-}
-
-
-
- 
-
   .vol-icon { color: var(--muted); font-size: 13px; }
   #vol { width: 80px; accent-color: var(--green); }
 
@@ -586,7 +558,7 @@
   <div class="logo">
     <div class="logo-icon"><i class="fas fa-radio"></i></div>
     <div class="logo-text">
-      <strong>Radio Palavra Inspirando Vida - WEB</strong>
+      <strong>Rádio Palavra Viva</strong>
       <span>Web · 24h no ar</span>
     </div>
   </div>
@@ -602,9 +574,8 @@
 <!-- MAIN -->
 <div class="main">
 
- <!-- HERO -->
-  <div class="hero">
-   <div class="main">
+  <!-- HERO -->
+ <div class="main">
 
 
 
@@ -785,6 +756,7 @@ Clique em Play para ouvir
 
 </div>
 
+
   </div>
 
   <!-- INFO CARDS -->
@@ -807,8 +779,9 @@ Clique em Play para ouvir
     </div>
     <div class="info-card">
       <div class="info-card-icon"><i class="fas fa-microphone-lines"></i></div>
-      <h4>apresentadores ao vivo</h4>
-      <p>00h - 08h - 13h - 19 - 00h<br><span style="color:var(--green);font-size:10px;">Mensagens, interação e adoração em tempo real</span></p>
+      <h4>Programas ao Vivo</h4>
+      <p>Mensagens, interação e adoração em tempo real com apresentadores</p>
+    </div>
   </div>
 
   <!-- TABS -->
@@ -824,36 +797,32 @@ Clique em Play para ouvir
     <div class="schedule-item" id="slot1">
       <div class="schedule-time">00:00 – 08:00</div>
       <div class="schedule-info">
-        <strong>Clássicos Evangélicos</strong> <span>Web · 24h no ar</span>
+        <strong>Clássicos Evangélicos</strong>
         <span>Hinários e pioneiros do gospel brasileiro</span>
-        
       </div>
       <span class="schedule-badge badge-sched">Noturno</span>
     </div>
     <div class="schedule-item" id="slot2">
       <div class="schedule-time">08:00 – 13:00</div>
       <div class="schedule-info">
-        <strong>Era de Ouro Gospel</strong> <span>Web · 24h no ar</span>
+        <strong>Era de Ouro Gospel</strong>
         <span>Os maiores sucessos de 2000 a 2015</span>
-       
       </div>
       <span class="schedule-badge badge-sched">Manhã</span>
     </div>
     <div class="schedule-item" id="slot3">
       <div class="schedule-time">13:00 – 19:00</div>
       <div class="schedule-info">
-        <strong>Hits & Lançamentos</strong> <span>Web · 24h no ar</span>
+        <strong>Hits & Lançamentos</strong>
         <span>Novidades e músicas mais tocadas do momento</span>
-        
       </div>
       <span class="schedule-badge badge-sched">Tarde</span>
     </div>
     <div class="schedule-item">
       <div class="schedule-time">19:00 – 00:00</div>
       <div class="schedule-info">
-        <strong>Programação Gospel</strong> <span>Web · 24h no ar</span>
+        <strong>Programação Gospel</strong>
         <span>Mix especial com os melhores do dia</span>
-       
       </div>
       <span class="schedule-badge badge-sched">Noite</span>
     </div>
@@ -891,8 +860,8 @@ Clique em Play para ouvir
   <!-- ABOUT TAB -->
   <div id="about" class="tab-panel">
     <div class="about-card">
-      <h3>Radio Palavra Inspirando Vida - WEB</h3>
-      <p>Radio Palavra Inspirando Vida - WEB Web é um canal digital dedicado a levar a mensagem de fé, esperança e transformação através da música e da Palavra de Deus. Com programação 24 horas ininterruptas, transmitimos louvores, adoração, mensagens bíblicas e conteúdos inspiradores que fortalecem a sua fé em qualquer momento do dia.</p>
+      <h3>Rádio Palavra Viva Web</h3>
+      <p>A Rádio Palavra Viva Web é um canal digital dedicado a levar a mensagem de fé, esperança e transformação através da música e da Palavra de Deus. Com programação 24 horas ininterruptas, transmitimos louvores, adoração, mensagens bíblicas e conteúdos inspiradores que fortalecem a sua fé em qualquer momento do dia.</p>
       <br>
       <p>Nossa missão é alcançar corações por meio da música gospel, desde os clássicos imortais até os lançamentos mais recentes, sempre com qualidade e comprometimento com a fé cristã.</p>
       <br>
@@ -915,7 +884,7 @@ Clique em Play para ouvir
   <div class="player-left">
     <div class="player-art"><i class="fas fa-cross"></i></div>
     <div class="player-info">
-      <div class="player-title" id="playerTitle">Radio Palavra Inspirando Vida - WEB</div>
+      <div class="player-title" id="playerTitle">Rádio Palavra Viva</div>
       <div class="player-status" id="playerStatus">Offline · Clique para ouvir</div>
     </div>
   </div>
@@ -931,10 +900,8 @@ Clique em Play para ouvir
   </div>
 </div>
 
-
-
 <audio id="audio">
-<source src="https://oven-quad-karl-queue.trycloudflare.com/stream">
+  <source src="https://oven-quad-karl-queue.trycloudflare.com/stream" type="audio/mpeg">
 </audio>
 
 <script>
@@ -944,7 +911,7 @@ const playIcon = document.getElementById('playIcon');
 const vol = document.getElementById('vol');
 let playing = false;
 
-audio.volume = 0.10;
+audio.volume = 0.6;
 vol.oninput = () => audio.volume = vol.value;
 
 function togglePlay() {
@@ -955,8 +922,8 @@ function togglePlay() {
     document.getElementById('playerStatus').textContent = '🔴 Ao Vivo · Transmitindo';
     document.getElementById('liveBadge').style.display = 'flex';
     document.getElementById('npTitle').textContent = 'Transmissão ao vivo';
-    document.getElementById('npSub').textContent = 'Rádio Palavra Inspirando vida - WEB · Gospel 24h';
-    document.getElementById('ouvintes-count') .textContent = '18';
+    document.getElementById('npSub').textContent = 'Rádio Palavra Viva · Gospel 24h';
+    document.getElementById('ouvintes-count').textContent = '—';
     document.getElementById('waveform').classList.remove('paused');
     document.getElementById('spinRing').style.animationPlayState = 'running';
   } else {
@@ -1050,66 +1017,5 @@ function carregarPedidos() {
   `).join('');
 }
 </script>
- <!-- Todo o conteúdo do seu site -->
-
-<div style="font-size:20px;font-weight:bold">
-Ouvintes Online:
-<span id="ouvintes">0</span>
-</div>
-
-<script>
-async function atualizar() {
-    try {
-        const resposta = await fetch("https://SEU-LINK.trycloudflare.com/admin/stats?mode=xml");
-
-        const texto = await resposta.text();
-
-        const xml = new DOMParser().parseFromString(texto, "text/xml");
-
-        const ouvintes = xml.querySelector("listeners").textContent;
-
-        document.getElementById("ouvintes").innerHTML = ouvintes;
-
-    } catch(e) {
-        document.getElementById("ouvintes").innerHTML = "Offline";
-    }
-}
-
-atualizar();
-setInterval(atualizar,5000);
-
-</script>
-<script>
-let wakeLock = null;
-
-async function manterTelaAcesa() {
-    try {
-        if ('wakeLock' in navigator) {
-            wakeLock = await navigator.wakeLock.request('screen');
-            console.log("Tela permanecerá ligada.");
-
-            wakeLock.addEventListener('release', () => {
-                console.log("Wake Lock liberado.");
-            });
-        }
-    } catch (err) {
-        console.log(err.name, err.message);
-    }
-}
-
-manterTelaAcesa();
-
-document.addEventListener("visibilitychange", async () => {
-    if (wakeLock !== null && document.visibilityState === "visible") {
-        wakeLock = await navigator.wakeLock.request("screen");
-    }
-});
-</script>
 </body>
 </html>
- 
-
-
- 
-
- 
