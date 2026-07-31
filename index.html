@@ -824,7 +824,7 @@ function togglePlay() {
     document.getElementById('liveBadge').style.display = 'flex';
     document.getElementById('npTitle').textContent = 'Transmissão ao vivo';
     document.getElementById('npSub').textContent = 'Rádio Palavra Inspirando vida - WEB · Gospel 24h';
-    document.getElementById('ouvintes-count') .textContent = '🟠 ouvindo';
+    document.getElementById('ouvintes-count') .textContent = '18';
     document.getElementById('waveform').classList.remove('paused');
     document.getElementById('spinRing').style.animationPlayState = 'running';
   } else {
@@ -940,48 +940,25 @@ document.addEventListener("visibilitychange", async () => {
     }
 });
 </script>
+<span id="ouvintes">0</span>
+
 <script>
-function atualizar() {
+async function atualizarOuvintes() {
+    try {
+        const res = await fetch("https://oven-quad-karl-queue.trycloudflare.com/status-json.xsl");
+        const data = await res.json();
 
-    fetch("https://oven-quad-karl-queue.trycloudflare.com/status-json.xsl")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Erro HTTP: " + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-
-            let src = data.icestats.source;
-
-            if (Array.isArray(src)) {
-                src = src.find(s => s.listenurl && s.listenurl.includes("/stream"));
-            }
-
-            if (!src) {
-                document.getElementById("listeners").textContent = "0";
-                document.getElementById("peak").textContent = "0";
-                document.getElementById("title").textContent = "Stream não encontrada";
-                return;
-            }
-
-            document.getElementById("listeners").textContent = src.listeners || 0;
-            document.getElementById("peak").textContent = src.listener_peak || 0;
-            document.getElementById("title").textContent =
-                src.title || src.server_name || "Sem título";
-
-        })
-        .catch(error => {
-            console.error("Erro:", error);
-            document.getElementById("listeners").textContent = "0";
-            document.getElementById("peak").textContent = "0";
-            document.getElementById("title").textContent = "Erro ao obter dados";
-        });
+        document.getElementById("ouvintes").textContent =
+            data.icestats.source.listeners;
+    } catch (e) {
+        document.getElementById("ouvintes").textContent = "--";
+    }
 }
 
-atualizar();
-setInterval(atualizar, 5000);
+atualizarOuvintes();
+setInterval(atualizarOuvintes, 5000);
 </script>
+
 </body>
 </html>
  
