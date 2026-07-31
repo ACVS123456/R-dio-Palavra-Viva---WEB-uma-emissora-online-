@@ -947,7 +947,32 @@ atualizar();
 setInterval(atualizar,5000);
 
 </script>
+<script>
+let wakeLock = null;
 
+async function manterTelaAcesa() {
+    try {
+        if ('wakeLock' in navigator) {
+            wakeLock = await navigator.wakeLock.request('screen');
+            console.log("Tela permanecerá ligada.");
+
+            wakeLock.addEventListener('release', () => {
+                console.log("Wake Lock liberado.");
+            });
+        }
+    } catch (err) {
+        console.log(err.name, err.message);
+    }
+}
+
+manterTelaAcesa();
+
+document.addEventListener("visibilitychange", async () => {
+    if (wakeLock !== null && document.visibilityState === "visible") {
+        wakeLock = await navigator.wakeLock.request("screen");
+    }
+});
+</script>
 </body>
 </html>
  
