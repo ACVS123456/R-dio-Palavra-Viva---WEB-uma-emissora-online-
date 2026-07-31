@@ -920,43 +920,32 @@ function carregarPedidos() {
 </script>
  <!-- Todo o conteúdo do seu site -->
 
-<script>
-let wakeLock = null;
-
-async function manterTelaLigada() {
-    try {
-        wakeLock = await navigator.wakeLock.request("screen");
-        console.log("Tela ligada");
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-manterTelaLigada();
-
-document.addEventListener("visibilitychange", async () => {
-    if (document.visibilityState === "visible") {
-        manterTelaLigada();
-    }
-});
-</script>
+<div style="font-size:20px;font-weight:bold">
+Ouvintes Online:
 <span id="ouvintes">0</span>
+</div>
 
 <script>
-async function atualizarOuvintes() {
+async function atualizar() {
     try {
-        const res = await fetch("https://oven-quad-karl-queue.trycloudflare.com/status-json.xsl");
-        const data = await res.json();
+        const resposta = await fetch("https://SEU-LINK.trycloudflare.com/admin/stats?mode=xml");
 
-        document.getElementById("ouvintes").textContent =
-            data.icestats.source.listeners;
-    } catch (e) {
-        document.getElementById("ouvintes").textContent = "--";
+        const texto = await resposta.text();
+
+        const xml = new DOMParser().parseFromString(texto, "text/xml");
+
+        const ouvintes = xml.querySelector("listeners").textContent;
+
+        document.getElementById("ouvintes").innerHTML = ouvintes;
+
+    } catch(e) {
+        document.getElementById("ouvintes").innerHTML = "Offline";
     }
 }
 
-atualizarOuvintes();
-setInterval(atualizarOuvintes, 5000);
+atualizar();
+setInterval(atualizar,5000);
+
 </script>
 
 </body>
