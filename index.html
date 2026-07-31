@@ -926,63 +926,27 @@ function carregarPedidos() {
 
  
  </script>
+<script>
+let wakeLock;
 
-</script>
- <script>
-const audio = document.getElementById('audio');
-const playBtn = document.getElementById('playBtn');
-
-// seu código atual continua aqui...
-
-
-// =======================================
-// MANTER TELA LIGADA - CELULAR + PC
-// =======================================
-
-let wakeLock = null;
-
-async function manterTelaLigada() {
-
-    try {
-
-        if ("wakeLock" in navigator) {
-
-            wakeLock = await navigator.wakeLock.request("screen");
-
-            console.log("Tela mantida ligada");
-
-            wakeLock.addEventListener("release", () => {
-                console.log("Wake Lock liberado");
-            });
-
-        }
-
-    } catch (erro) {
-
-        console.log("Erro Wake Lock:", erro);
-
-    }
-
+async function ativarWakeLock() {
+  try {
+    wakeLock = await navigator.wakeLock.request("screen");
+    console.log("Tela permanecerá ligada.");
+  } catch (e) {
+    console.log(e);
+  }
 }
 
+ativarWakeLock();
 
-// ativa ao abrir o site
-window.addEventListener("load", () => {
-    manterTelaLigada();
+document.addEventListener("visibilitychange", async () => {
+  if (wakeLock !== null && document.visibilityState === "visible") {
+    wakeLock = await navigator.wakeLock.request("screen");
+  }
 });
-
-
-// ativa novamente quando voltar para a página
-document.addEventListener("visibilitychange", () => {
-
-    if (document.visibilityState === "visible") {
-
-        manterTelaLigada();
-
-    }
-
-});
-</body>
+</script>
+ </body>
 </html>
 </html>
 
