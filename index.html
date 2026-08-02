@@ -598,7 +598,7 @@
 
 <!-- MAIN -->
 <div class="main">
-<span>Sempre que possivel na falta de audio, mexa a tela de cima pra baixo para atualizar e clicar no play</span>
+ <div class="live-dot"></div> Sempre que possivel na falta de audio, mexa a tela de cima pra baixo para atualizar e clicar no play </div>
   <!-- HERO -->
   <section class="hero">
     <div>
@@ -613,7 +613,7 @@
           <div class="stat-label">No ar</div>
         </div>
         <div>
-          <div class="stat-value" id="ouvintes-count">🔇</div>
+          <div class="stat-value" id="ouvintes-count">Offline</div>
           <div class="stat-label">Ouvindo</div>
         </div>
         <div>
@@ -849,7 +849,7 @@ function updateClock() {
 
   /* Highlight schedule slot */
   const hr = now.getHours();
-  ['slot1','slot2','slot3'].forEach(id => {
+  ['slot1','slot2','slot3','slot4'].forEach(id => {
     const el = document.getElementById(id);
     if(el) el.classList.remove('active-slot');
   });
@@ -857,6 +857,7 @@ function updateClock() {
   if (hr < 8) activeSlot = 'slot1';
   else if (hr < 13) activeSlot = 'slot2';
   else if (hr < 19) activeSlot = 'slot3';
+  else if (hr < 00) activeSlot = 'slot4';
 
   if (activeSlot) {
     const el = document.getElementById(activeSlot);
