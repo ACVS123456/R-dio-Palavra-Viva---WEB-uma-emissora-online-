@@ -898,10 +898,18 @@ function enviarPedido() {
   alert('Pedido enviado com sucesso! 🎵');
 }
 
+
 /* ADMIN */
 function abrirAdmin() {
   const senha = prompt('Senha de administrador:');
-  if (senha !=mar('89072345') { if(senha !== null) alert('Senha incorreta.'); return; }
+
+  if (senha !== '89072345') {
+    if (senha !== null) {
+      alert('Senha incorreta.');
+    }
+    return;
+  }
+
   document.getElementById('adminTabBtn').style.display = 'flex';
   switchTab('adminPanel', document.getElementById('adminTabBtn'));
   carregarPedidos();
