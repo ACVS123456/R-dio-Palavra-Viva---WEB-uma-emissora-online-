@@ -613,11 +613,11 @@
           <div class="stat-label">No ar</div>
         </div>
         <div>
-          <div class="stat-value" id="ouvintes-count">🔴 NO AR </div>
+          <div class="stat-value" id="ouvintes-count">🔇</div>
           <div class="stat-label">Ouvindo</div>
         </div>
         <div>
-          <div class="stat-value">3</div>
+          <div class="stat-value">4</div>
           <div class="stat-label">Programas</div>
         </div>
       </div>
@@ -669,7 +669,7 @@
     <div class="info-card">
       <div class="info-card-icon"><i class="fas fa-microphone-lines"></i></div>
       <h4>19h - 00h</h4>
-      <p>Contemporâneos & Hits<br><span style="color:var(--green);font-size:10px;">hoje · Melhores do dia</span></p>
+      <p>Contemporâneos & Hits<br><span style="color:var(--green);font-size:10px;">Melhores do dia</span></p>
      
     </div>
   </div>
@@ -708,10 +708,10 @@
       </div>
       <span class="schedule-badge badge-sched">Tarde</span>
     </div>
-    <div class="schedule-item">
+    <div class="schedule-item" id="slot4">
       <div class="schedule-time">19:00 – 00:00</div>
       <div class="schedule-info">
-        <strong>Programação Gospel</strong>
+        <strong>Resumo Gospel</strong>
         <span>Mix especial com os melhores do dia</span>
       </div>
       <span class="schedule-badge badge-sched">Noite</span>
@@ -817,7 +817,7 @@ function togglePlay() {
     document.getElementById('liveBadge').style.display = 'flex';
     document.getElementById('npTitle').textContent = 'Transmissão ao vivo';
     document.getElementById('npSub').textContent = 'Rádio Palavra Inspirando Vida - WEB· Gospel 24h';
-    document.getElementById('ouvintes-count').textContent = '—';
+    document.getElementById('ouvintes-count').textContent = '🎧';
     document.getElementById('waveform').classList.remove('paused');
     document.getElementById('spinRing').style.animationPlayState = 'running';
     
