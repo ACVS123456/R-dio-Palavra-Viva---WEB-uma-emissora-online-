@@ -603,7 +603,7 @@
   <section class="hero">
     <div>
       <div class="hero-label">Música Gospel 24h</div>
-      <div id="speaker" class="speaker">🔊</div>
+      <div id="speaker" class="speaker">🔊</div><br><div id="speaker" class="speaker">🔊</div>
       <h1 class="hero-title">A Palavra que<br>Transforma Vidas</h1>
       <p class="hero-subtitle">Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias.</p>
 
@@ -613,11 +613,11 @@
           <div class="stat-label">No ar</div>
         </div>
         <div>
-          <div class="stat-value" id="ouvintes-count">20</div>
+          <div class="stat-value" id="ouvintes-count">🔴 NO AR </div>
           <div class="stat-label">Ouvindo</div>
         </div>
         <div>
-          <div class="stat-value">3</div>
+          <div class="stat-value">4</div>
           <div class="stat-label">Programas</div>
         </div>
       </div>
@@ -632,7 +632,7 @@
   <!-- AGORA TOCANDO -->
   <div class="now-playing">
     <div class="now-playing-icon">
-      <i class="fas fa-music"></i>
+      <i class="fas fa-music">🟢</i>
     </div>
     <div class="np-info">
       <div class="np-tag">Tocando agora</div>
@@ -654,22 +654,22 @@
     <div class="info-card">
       <div class="info-card-icon"><i class="fas fa-clock"></i></div>
       <h4>00h – 08h</h4>
-      <p>Clássicos Evangélicos<br><span style="color:var(--green);font-size:10px;">Até 1999 · Hinários e pioneiros</span></p>
+      <p>Clássicos Evangélicos<br><span style="color:var(--green);font-size:10px;">1960 Até 1999 · Hinários e pioneiros</span></p>
     </div>
     <div class="info-card">
       <div class="info-card-icon"><i class="fas fa-headphones"></i></div>
       <h4>08h – 13h</h4>
-      <p>Era de Ouro Gospel<br><span style="color:var(--green);font-size:10px;">2000–2015 · Muito lembradas</span></p>
+      <p>Era de Ouro Gospel<br><span style="color:var(--green);font-size:10px;">2000 a 2016 · Muito lembradas</span></p>
     </div>
     <div class="info-card">
       <div class="info-card-icon"><i class="fas fa-fire"></i></div>
       <h4>13h – 19h</h4>
-      <p>Contemporâneos & Hits<br><span style="color:var(--green);font-size:10px;">2016–hoje · Lançamentos</span></p>
+      <p>Contemporâneos & Hits<br><span style="color:var(--green);font-size:10px;">2016 a 2026–hoje · Lançamentos</span></p>
     </div>
     <div class="info-card">
       <div class="info-card-icon"><i class="fas fa-microphone-lines"></i></div>
-      <h4>Programas ao Vivo e apresentadores ao vivo</h4>
-      <p>Contemporâneos & Hits<br><span style="color:var(--green);font-size:10px;">2016–hoje · Lançamentos</span></p>
+      <h4>19h - 00h</h4>
+      <p>Contemporâneos & Hits<br><span style="color:var(--green);font-size:10px;">hoje · Melhores do dia</span></p>
      
     </div>
   </div>
@@ -785,7 +785,7 @@
   </div>
   <div class="player-right">
     <i class="fas fa-volume-low vol-icon"></i>
-    <input type="range" id="vol" min="0" max="1" step="0.01" value="0.6">
+    <input type="range" id="vol" min="0" max="1" step="0.01" value="0.10">
     <i class="fas fa-volume-high vol-icon"></i>
   </div>
 </div>
@@ -805,7 +805,7 @@ const vol = document.getElementById('vol');
 const speaker = document.getElementById('speaker');
 let playing = false;
 
-audio.volume = 0.6;
+audio.volume = 0.10;
 vol.oninput = () => audio.volume = vol.value;
 
 function togglePlay() {
@@ -901,7 +901,7 @@ function enviarPedido() {
 /* ADMIN */
 function abrirAdmin() {
   const senha = prompt('Senha de administrador:');
-  if (senha !== '928374') { if(senha !== null) alert('Senha incorreta.'); return; }
+  if (senha !=mar89072345') { if(senha !== null) alert('Senha incorreta.'); return; }
   document.getElementById('adminTabBtn').style.display = 'flex';
   switchTab('adminPanel', document.getElementById('adminTabBtn'));
   carregarPedidos();
