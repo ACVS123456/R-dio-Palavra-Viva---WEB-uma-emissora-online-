@@ -212,6 +212,30 @@
       transform: scale(1.25) rotate(4deg);
     }
   }
+
+   /*--cifra--*/
+ .cifra {
+    font-size: 28px;
+    display: inline-block;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+  }
+
+  .cifra.vibrating {
+    animation: cifraPulse 0.3s ease-in-out infinite alternate;
+  }
+
+  @keyframes cifraPulse {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.18) rotate(-4deg);
+    }
+    100% {
+      transform: scale(1.25) rotate(4deg);
+    }
+  }
  
   /* ── ALBUM ART / VISUAL ── */
   .album-art {
@@ -629,6 +653,7 @@
       <div class="hero-label">Música Gospel 24h</div>
       <div id="speaker" class="speaker">🔊</div> 
      <div id="fone" class="fone">🎧</div>
+     <div id="cifra" class="cifra">🎵</div>
       <h1 class="hero-title">A Palavra que<br>Transforma Vidas</h1>
       <p class="hero-subtitle">Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias.</p>
 
@@ -829,6 +854,7 @@ const playIcon = document.getElementById('playIcon');
 const vol = document.getElementById('vol');
 const speaker = document.getElementById('speaker');
 const fone = document.getElementById('fone');
+const cifra = document.getElementById('cifra');
 let playing = false;
 
 audio.volume = 0.10;
@@ -849,6 +875,7 @@ function togglePlay() {
     
     /* Liga a vibração do alto-falante */
    fone.classList.add('vibrating');
+   cifra.classList.add('vibrating');
     speaker.classList.add('vibrating');
   } else {
     audio.pause();
@@ -863,6 +890,7 @@ function togglePlay() {
     
     /* Desliga a vibração do alto-falante */
     fone.classList.remove('vibrating');
+    cifra.classList.remove('vibrating');
     speaker.classList.remove('vibrating');
   }
 }
