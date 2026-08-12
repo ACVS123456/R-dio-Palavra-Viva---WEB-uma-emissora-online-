@@ -955,11 +955,12 @@ function enviarPedido() {
 }
 
 
+
 /* ADMIN */
 function abrirAdmin() {
   const senha = prompt('Senha de administrador:');
 
-  if (senha !== '89072345') {
+  if (senha !== '6760!@#$%') {
     if (senha !== null) {
       alert('Senha incorreta.');
     }
@@ -971,6 +972,7 @@ function abrirAdmin() {
   carregarPedidos();
 }
 
+  
 function carregarPedidos() {
   const lista = document.getElementById('adminLista');
   const pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
