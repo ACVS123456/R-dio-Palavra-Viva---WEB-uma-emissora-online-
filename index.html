@@ -960,7 +960,11 @@ function enviarPedido() {
 function abrirAdmin() {
   const senha = prompt('Senha de administrador:');
 
-  if (senha !== '6760!@#$%') {
+  const chave = [54,55,54,48,33,64,35,36,37]
+    .map(n => String.fromCharCode(n))
+    .join('');
+
+  if (senha !== chave) {
     if (senha !== null) {
       alert('Senha incorreta.');
     }
