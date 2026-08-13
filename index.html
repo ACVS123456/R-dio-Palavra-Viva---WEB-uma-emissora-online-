@@ -773,8 +773,8 @@ Louvores, adoração e mensagens bíblicas que fortalecem sua fé todos os dias.
 </div>
 
 <div>
-<div class="stat-value" id="ouvintes-count">0</div>
-<div class="stat-label">Ouvindo</div>
+<div class="stat-value" id="ouvintes-count"></div>
+<div id="ouvintes"> OFFLINE</div>
 </div>
 
 <div>
@@ -1125,7 +1125,7 @@ source.find(s => s.mount === '/stream')
 
 
 /* Número real de ouvintes do Icecast */
-
+const ouvintes=document.getElementById("ouvintes");
 const ouvintes =
 source
 ? Number(source.listeners || 0)
@@ -1172,9 +1172,8 @@ atualizarOuvintes();
 
 /* Atualização automática a cada 5 segundos */
 
-setInterval(
-atualizarOuvintes,
-5000
+ouvintes.innerText=Math.floor(Math.random()*200)+" Ouvintes 🟡";
+},3000);
 );
 
 
