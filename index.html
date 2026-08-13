@@ -670,7 +670,10 @@ font-family: inherit;
   <i class="fas fa-cross"></i>  
 </div>
 
-  </section>    <!-- AGORA TOCANDO -->    <div class="now-playing">  
+  </section>  
+ 
+ <!-- AGORA TOCANDO -->    
+ <div class="now-playing">  
     <div class="now-playing-icon">  
       <i class="fas fa-music"></i>  
     </div>  
@@ -686,28 +689,49 @@ font-family: inherit;
       <div class="wave-bar"></div>  
       <div class="wave-bar"></div>  
     </div>  
-  </div>    <!-- INFO CARDS -->    <div class="section-title">Sobre a rádio</div>  
-  <div class="info-grid" style="margin-bottom:24px;">  
-    <div class="info-card">  
-      <div class="info-card-icon"><i class="fas fa-clock"></i></div>  
-      <h4>00h – 08h</h4>  
-      <p>Clássicos Evangélicos<br><span style="color:var(--green);font-size:10px;">1960 Até 1999 · Hinários e pioneiros</span></p>  
-    </div>  
-    <div class="info-card">  
-      <div class="info-card-icon"><i class="fas fa-headphones"></i></div>  
-      <h4>08h – 13h</h4>  
-      <p>Era de Ouro Gospel<br><span style="color:var(--green);font-size:10px;">2000 a 2016 · Muito lembradas</span></p>  
-    </div>  
-    <div class="info-card">  
-      <div class="info-card-icon"><i class="fas fa-fire"></i></div>  
-      <h4>13h – 19h</h4>  
-      <p>Contemporâneos & Hits<br><span style="color:var(--green);font-size:10px;">2016 a 2026–hoje · Lançamentos</span></p>  
-    </div>  
-    <div class="info-card">  
-      <div class="info-card-icon"><i class="fas fa-microphone-lines"></i></div>  
-      <h4>19h - 00h</h4>  
-      <p>Contemporâneos & Hits<br><span style="color:var(--green);font-size:10px;">Melhores do dia</span></p>  </div>
+  </div>    <!-- INFO CARDS -->    </div>
 
+<div class="section-title">Sobre a rádio</div>
+
+<div class="info-grid">
+
+<div class="info-card">
+<div class="info-card-icon">
+<i class="fas fa-clock"></i>
+</div>
+<h4>00h – 08h</h4>
+<p>Clássicos Evangélicos<br>
+<span style="color:var(--green)">1960 até 1999</span></p>
+</div>
+
+<div class="info-card">
+<div class="info-card-icon">
+<i class="fas fa-headphones"></i>
+</div>
+<h4>08h – 13h</h4>
+<p>Era de Ouro Gospel<br>
+<span style="color:var(--green)">2000 a 2016</span></p>
+</div>
+
+<div class="info-card">
+<div class="info-card-icon">
+<i class="fas fa-fire"></i>
+</div>
+<h4>13h – 19h</h4>
+<p>Contemporâneos & Hits<br>
+<span style="color:var(--green)">2016 a 2026</span></p>
+</div>
+
+<div class="info-card">
+<div class="info-card-icon">
+<i class="fas fa-microphone-lines"></i>
+</div>
+<h4>19h – 00h</h4>
+<p>Contemporâneos & Hits<br>
+<span style="color:var(--green)">Melhores do dia</span></p>
+</div>
+
+</div>
   </div>    <!-- TABS -->    <div class="tabs">  
     <button class="tab-btn active" onclick="switchTab('schedule',this)">Programação</button>  
     <button class="tab-btn" onclick="switchTab('request',this)">Pedir Música</button>  
@@ -806,122 +830,279 @@ font-family: inherit;
   </div>  
 </div>  <audio id="audio" preload="none">  
     <source src="https://west-sensor-conducted-architectural.trycloudflare.com/stream" type="audio/mpeg">  
-</audio>  <script>  
-/* CONTADOR DE OUVINTES - ICECAST */  
-async function atualizarOuvintes() {  
-  try {  
-    const resposta = await fetch('http://localhost:8000/status-json.xsl');  
-  
-    if (!resposta.ok) {  
-      throw new Error('Icecast indisponível');  
-    }  
-  
-    const dados = await resposta.json();  
-  
-    let source = dados.icestats.source;  
-  
-    if (Array.isArray(source)) {  
-      source = source.find(s =>  
-        s.mount === '/stream'  
-      ) || source[0];  
-    }  
-  
-    const ouvintes = source ? Number(source.listeners || 0) : 0;  
-  
-    document.getElementById('ouvintes-count').textContent = ouvintes;  
-  
-  } catch (erro) {  
-    console.log('Erro ao consultar Icecast:', erro);  
-    document.getElementById('ouvintes-count').textContent = '0';  
-  }  
-}  
-  
-atualizarOuvintes();  
-setInterval(atualizarOuvintes, 5000);  
-   
-const audio = document.getElementById('audio');  
-const playBtn = document.getElementById('playBtn');  
-const playIcon = document.getElementById('playIcon');  
-const vol = document.getElementById('vol');  
-const speaker = document.getElementById('speaker');  
-const fone = document.getElementById('fone');  
-const cifra = document.getElementById('cifra');  
-let playing = false;  
-  
-audio.volume = 0.10;  
-vol.oninput = () => audio.volume = vol.value;  
-  
-function togglePlay() {  
-  if (!playing) {  
-    audio.play().catch(() => alert('Toque novamente'));  
-    playing = true;  
-    playIcon.className = 'fas fa-pause';  
-    document.getElementById('playerStatus').textContent = '🔴 Ao Vivo · Transmitindo';  
-    document.getElementById('liveBadge').style.display = 'flex';  
-    document.getElementById('npTitle').textContent = 'Transmissão ao vivo';  
-    document.getElementById('npSub').textContent = 'Rádio Palavra Inspirando Vida - WEB· Gospel 24h';  
-    document.getElementById('ouvintes-count').textContent = 'No AR';  
-    document.getElementById('waveform').classList.remove('paused');  
-    document.getElementById('spinRing').style.animationPlayState = 'running';  
-      
-    /* Liga a vibração do alto-falante */  
-   fone.classList.add('vibrating');  
-   cifra.classList.add('vibrating');  
-    speaker.classList.add('vibrating');  
-  } else {  
-    audio.pause();  
-    playing = false;  
-    playIcon.className = 'fas fa-play';  
-    document.getElementById('playerStatus').textContent = 'Offline · Clique para ouvir';  
-    document.getElementById('liveBadge').style.display = 'none';  
-    document.getElementById('npTitle').textContent = 'Aguardando transmissão…';  
-    document.getElementById('npSub').textContent = 'Clique em Play para ouvir';  
-    document.getElementById('waveform').classList.add('paused');  
-    document.getElementById('spinRing').style.animationPlayState = 'paused';  
-      
-    /* Desliga a vibração do alto-falante */  
-    fone.classList.remove('vibrating');  
-    cifra.classList.remove('vibrating');  
-    speaker.classList.remove('vibrating');  
-  }  
-}  
-  
-/* CLOCK */  
-function updateClock() {  
-  const now = new Date();  
-  const h = String(now.getHours()).padStart(2,'0');  
-  const m = String(now.getMinutes()).padStart(2,'0');  
-  const s = String(now.getSeconds()).padStart(2,'0');  
-  document.getElementById('clock').textContent = ${h}:${m}:${s};  
-  
-  /* Highlight schedule slot */  
-  const hr = now.getHours();  
-  ['slot1','slot2','slot3','slot4'].forEach(id => {  
-    const el = document.getElementById(id);  
-    if(el) el.classList.remove('active-slot');  
-  });  
-  let activeSlot = null;  
-  if (hr < 8) activeSlot = 'slot1';  
-  else if (hr < 13) activeSlot = 'slot2';  
-  else if (hr < 19) activeSlot = 'slot3';  
-  else if (hr < 00) activeSlot = 'slot4';  
-  
-  if (activeSlot) {  
-    const el = document.getElementById(activeSlot);  
-    if(el) {  
-      el.classList.add('active-slot');  
-      const badge = el.querySelector('.schedule-badge');  
-      if(badge) {  
-        badge.className = 'schedule-badge badge-live';  
-        badge.textContent = 'Agora';  
-      }  
-    }  
-  }  
-}  
-setInterval(updateClock, 1000);  
-updateClock();  
-  
-/* TABS */  
+</audio>  
+ 
+ <script>  
+<script>
+
+/* =========================================================
+   CONTADOR DE OUVINTES - ICECAST
+   ========================================================= */
+
+const ICECAST_STATUS =
+'https://west-sensor-conducted-architectural.trycloudflare.com/status-json.xsl';
+
+
+async function atualizarOuvintes(){
+
+try{
+
+const resposta = await fetch(
+ICECAST_STATUS + '?t=' + Date.now(),
+{
+cache:'no-store'
+}
+);
+
+if(!resposta.ok){
+
+throw new Error(
+'Icecast indisponível: ' + resposta.status
+);
+
+}
+
+const dados = await resposta.json();
+
+let source = dados.icestats?.source;
+
+
+/* Se houver vários mounts */
+
+if(Array.isArray(source)){
+
+source =
+source.find(s => s.mount === '/stream')
+|| source[0];
+
+}
+
+
+/* Número real de ouvintes do Icecast */
+
+const ouvintes =
+source
+? Number(source.listeners || 0)
+: 0;
+
+
+/* Mostra na página */
+
+document.getElementById(
+'ouvintes-count'
+).textContent = ouvintes;
+
+
+/* Também atualiza o título */
+
+document.getElementById(
+'ouvintes-count'
+).title =
+ouvintes === 1
+? '1 ouvinte conectado'
+: ouvintes + ' ouvintes conectados';
+
+
+}catch(erro){
+
+console.log(
+'Erro ao consultar Icecast:',
+erro
+);
+
+document.getElementById(
+'ouvintes-count'
+).textContent = '0';
+
+}
+
+}
+
+
+/* Primeira consulta */
+
+atualizarOuvintes();
+
+
+/* Atualização automática a cada 5 segundos */
+
+setInterval(
+atualizarOuvintes,
+5000
+);
+
+
+/* =========================================================
+   PLAYER
+   ========================================================= */
+
+const audio =
+document.getElementById('audio');
+
+const playIcon =
+document.getElementById('playIcon');
+
+const vol =
+document.getElementById('vol');
+
+const speaker =
+document.getElementById('speaker');
+
+const fone =
+document.getElementById('fone');
+
+const cifra =
+document.getElementById('cifra');
+
+let playing = false;
+
+audio.volume = 0.10;
+
+vol.oninput = () => {
+
+audio.volume = vol.value;
+
+};
+
+
+function togglePlay(){
+
+if(!playing){
+
+audio.play().then(()=>{
+
+playing = true;
+
+playIcon.className =
+'fas fa-pause';
+
+document.getElementById(
+'playerStatus'
+).textContent =
+'🔴 Ao Vivo · Transmitindo';
+
+document.getElementById(
+'liveBadge'
+).style.display =
+'flex';
+
+document.getElementById(
+'npTitle'
+).textContent =
+'Transmissão ao vivo';
+
+document.getElementById(
+'npSub'
+).textContent =
+'Rádio Palavra Inspirando Vida - WEB · Gospel 24h';
+
+
+/*
+ NÃO coloca "No AR" no contador.
+ O contador continuará mostrando
+ o número real do Icecast.
+ */
+
+
+document.getElementById(
+'waveform'
+).classList.remove('paused');
+
+document.getElementById(
+'spinRing'
+).style.animationPlayState =
+'running';
+
+
+speaker.classList.add('vibrating');
+fone.classList.add('vibrating');
+cifra.classList.add('vibrating');
+
+
+/* Atualiza imediatamente */
+
+atualizarOuvintes();
+
+
+}).catch(()=>{
+
+alert(
+'Não foi possível iniciar a transmissão. Toque novamente.'
+);
+
+});
+
+}else{
+
+audio.pause();
+
+playing = false;
+
+playIcon.className =
+'fas fa-play';
+
+document.getElementById(
+'playerStatus'
+).textContent =
+'Offline · Clique para ouvir';
+
+document.getElementById(
+'liveBadge'
+).style.display =
+'none';
+
+document.getElementById(
+'npTitle'
+).textContent =
+'Aguardando transmissão…';
+
+document.getElementById(
+'npSub'
+).textContent =
+'Clique em Play para ouvir';
+
+document.getElementById(
+'waveform'
+).classList.add('paused');
+
+document.getElementById(
+'spinRing'
+).style.animationPlayState =
+'paused';
+
+fone.classList.remove('vibrating');
+cifra.classList.remove('vibrating');
+speaker.classList.remove('vibrating');
+
+}
+
+}
+
+
+/* =========================================================
+   CLOCK
+   ========================================================= */
+
+function updateClock(){
+
+const now =
+new Date();
+
+const h =
+String(now.getHours()).padStart(2,'0');
+
+const m =
+String(now.getMinutes()).padStart(2,'0');
+
+const s =
+String(now.getSeconds()).padStart(2,'0');
+
+document.getElementById(
+'clock'
+).textContent =
+${h}:${m}:${s};
+
+
 const hr =
 now.getHours();
 
