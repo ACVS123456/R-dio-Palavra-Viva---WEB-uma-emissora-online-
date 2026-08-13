@@ -922,5 +922,25 @@ function carregarPedidos() {
   `).join('');
 }
 </script>
+ <script>
+let wakeLock = null;
+
+async function manterTelaLigada() {
+    try {
+        wakeLock = await navigator.wakeLock.request("screen");
+        console.log("Tela ligada");
+    } catch (erro) {
+        console.log("Wake Lock não disponível:", erro);
+    }
+}
+
+manterTelaLigada();
+
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        manterTelaLigada();
+    }
+});
+ </script>
 </body>
 </html>
