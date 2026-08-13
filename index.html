@@ -847,6 +847,38 @@
  
 
 <script>
+/* CONTADOR DE OUVINTES - ICECAST */
+async function atualizarOuvintes() {
+  try {
+    const resposta = await fetch('http://localhost:8000/status-json.xsl');
+
+    if (!resposta.ok) {
+      throw new Error('Icecast indisponível');
+    }
+
+    const dados = await resposta.json();
+
+    let source = dados.icestats.source;
+
+    if (Array.isArray(source)) {
+      source = source.find(s =>
+        s.mount === '/stream'
+      ) || source[0];
+    }
+
+    const ouvintes = source ? Number(source.listeners || 0) : 0;
+
+    document.getElementById('ouvintes-count').textContent = ouvintes;
+
+  } catch (erro) {
+    console.log('Erro ao consultar Icecast:', erro);
+    document.getElementById('ouvintes-count').textContent = '0';
+  }
+}
+
+atualizarOuvintes();
+setInterval(atualizarOuvintes, 5000);
+ 
 const audio = document.getElementById('audio');
 const playBtn = document.getElementById('playBtn');
 const playIcon = document.getElementById('playIcon');
