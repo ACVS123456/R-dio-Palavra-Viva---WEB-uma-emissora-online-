@@ -898,7 +898,18 @@ function enviarPedido() {
 /* ADMIN */
 function abrirAdmin() {
   const senha = prompt('Senha de administrador:');
-  if (senha !== '928374') { if(senha !== null) alert('Senha incorreta.'); return; }
+
+  const chave = [54,55,54,48,33,64,35,36,37]
+    .map(n => String.fromCharCode(n))
+    .join('');
+
+  if (senha !== chave) {
+    if (senha !== null) {
+      alert('Senha incorreta.');
+    }
+    return;
+  }
+
   document.getElementById('adminTabBtn').style.display = 'flex';
   switchTab('adminPanel', document.getElementById('adminTabBtn'));
   carregarPedidos();
