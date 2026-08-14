@@ -614,7 +614,7 @@
           <div class="stat-label">No ar</div>
         </div>
         <div>
-          <div class="stat-value" id="ouvintes-count">20</div>
+          <div class="stat-value" id="ouvintes-count"></div>
           <div class="stat-label">Ouvindo</div>
         </div>
         <div>
@@ -785,7 +785,7 @@
   </div>
   <div class="player-right">
     <i class="fas fa-volume-low vol-icon"></i>
-    <input type="range" id="vol" min="0" max="1" step="0.01" value="0.6">
+    <input type="range" id="vol" min="0" max="1" step="0.01" value="0.10">
     <i class="fas fa-volume-high vol-icon"></i>
   </div>
 </div>
@@ -802,7 +802,7 @@ const vol = document.getElementById('vol');
 const speaker = document.getElementById('speaker');
 let playing = false;
 
-audio.volume = 0.6;
+audio.volume = 0.10;
 vol.oninput = () => audio.volume = vol.value;
 
 function togglePlay() {
