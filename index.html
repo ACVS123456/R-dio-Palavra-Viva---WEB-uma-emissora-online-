@@ -836,6 +836,289 @@ function togglePlay() {
   }
 }
 
+
+const ICECAST_STATS =
+  "https://python-surgeon-omissions-conditioning.trycloudflare.com/status-json.xsl";
+
+let ouvintesAnterior = null;
+let picoReal = 0;
+let historico = [];
+let logAudiencia = [];
+
+async function buscarIcecast() {
+    const resposta = await fetch(
+        ICECAST_STATS + "?t=" + Date.now(),
+        {
+            method: "GET",
+            cache: "no-store"
+        }
+    );
+
+    if (!resposta.ok) {
+        throw new Error("Icecast HTTP " + resposta.status);
+    }
+
+    const json = await resposta.json();
+
+    if (!json.icestats) {
+        throw new Error("Resposta do Icecast inválida");
+    }
+
+    let source = json.icestats.source;
+
+    if (Array.isArray(source)) {
+        source = source.find(
+            item => item.mount === "/stream"
+        );
+    }
+
+    if (!source) {
+        throw new Error("Mount /stream não encontrado");
+    }
+
+    return source;
+}
+
+
+function mostrarOuvintes(ouvintes) {
+
+    const elemento =
+        document.getElementById("ouvintes");
+
+    if (elemento) {
+        elemento.textContent = ouvintes;
+    }
+}
+
+
+function mostrarPico(picoIcecast) {
+
+    picoReal = Math.max(
+        picoReal,
+        Number(picoIcecast) || 0
+    );
+
+    const elemento =
+        document.getElementById("pico");
+
+    if (elemento) {
+        elemento.textContent = picoReal;
+    }
+}
+
+
+function registrar(tipo, ouvintes) {
+
+    const agora =
+        new Date().toLocaleTimeString("pt-BR");
+
+    const registro = {
+        horario: agora,
+        tipo: tipo,
+        ouvintes: ouvintes
+    };
+
+    logAudiencia.push(registro);
+
+    /*
+       Mantém somente os últimos 200 registros
+       no navegador.
+    */
+    if (logAudiencia.length > 200) {
+        logAudiencia.shift();
+    }
+
+    const log =
+        document.getElementById("logAudiencia");
+
+    if (!log) return;
+
+    const linha =
+        document.createElement("div");
+
+    linha.textContent =
+        `${agora} — ${tipo} — ${ouvintes} ouvinte(s)`;
+
+    log.prepend(linha);
+}
+
+
+function adicionarGrafico(ouvintes) {
+
+    historico.push({
+        horario: Date.now(),
+        ouvintes: ouvintes
+    });
+
+    /*
+       Guarda as últimas 120 leituras.
+       Com intervalo de 10 segundos:
+       120 × 10 = 20 minutos.
+    */
+    if (historico.length > 120) {
+        historico.shift();
+    }
+
+    desenharGrafico();
+}
+
+
+function desenharGrafico() {
+
+    const canvas =
+        document.getElementById("grafico");
+
+    if (!canvas) return;
+
+    const ctx =
+        canvas.getContext("2d");
+
+    const largura = canvas.width;
+    const altura = canvas.height;
+
+    ctx.clearRect(
+        0,
+        0,
+        largura,
+        altura
+    );
+
+    if (historico.length === 0) {
+        return;
+    }
+
+    const maior =
+        Math.max(
+            1,
+            ...historico.map(
+                item => item.ouvintes
+            )
+        );
+
+    ctx.beginPath();
+
+    historico.forEach((item, indice) => {
+
+        const x =
+            historico.length === 1
+                ? largura / 2
+                : indice *
+                  (largura - 20) /
+                  (historico.length - 1) + 10;
+
+        const y =
+            altura -
+            (item.ouvintes / maior) *
+            (altura - 20) -
+            10;
+
+        if (indice === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+    });
+
+    ctx.strokeStyle = "#1db954";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+}
+
+
+async function atualizarRadio() {
+
+    try {
+
+        const dados =
+            await buscarIcecast();
+
+        const ouvintes =
+            Number(dados.listeners) || 0;
+
+        mostrarOuvintes(ouvintes);
+
+        mostrarPico(
+            dados.listener_peak
+        );
+
+        /*
+           Primeira leitura:
+           não registra entrada nem saída.
+        */
+        if (ouvintesAnterior !== null) {
+
+            if (ouvintes > ouvintesAnterior) {
+
+                const entradas =
+                    ouvintes - ouvintesAnterior;
+
+                registrar(
+                    "ENTRADA +" + entradas,
+                    ouvintes
+                );
+            }
+
+            if (ouvintes < ouvintesAnterior) {
+
+                const saidas =
+                    ouvintesAnterior - ouvintes;
+
+                registrar(
+                    "SAÍDA -" + saidas,
+                    ouvintes
+                );
+            }
+        }
+
+        adicionarGrafico(ouvintes);
+
+        ouvintesAnterior =
+            ouvintes;
+
+        /*
+           Status online
+        */
+        const status =
+            document.getElementById("status");
+
+        if (status) {
+            status.textContent =
+                "🟢 RÁDIO ONLINE";
+        }
+
+    } catch (erro) {
+
+        console.error(
+            "Erro Icecast:",
+            erro
+        );
+
+        const status =
+            document.getElementById("status");
+
+        if (status) {
+            status.textContent =
+                "🔴 ICECAST INDISPONÍVEL";
+        }
+    }
+}
+
+
+/*
+   Primeira leitura imediatamente.
+*/
+atualizarRadio();
+
+
+/*
+   Depois atualiza a cada 10 segundos.
+*/
+setInterval(
+    atualizarRadio,
+    10000
+);
+ 
+ 
 /* CLOCK */
 function updateClock() {
   const now = new Date();
