@@ -958,286 +958,478 @@ document.addEventListener("visibilitychange", () => {
 
 
 
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Analítico — Rádio Palavra Inspirando Vida - WEB</title>
+<title>Rádio Palavra Inspirando Vida - WEB</title>
 
 <style>
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    background: #080b0e;
-    color: #e8edf1;
     font-family: Arial, Helvetica, sans-serif;
+    background: #0d1117;
+    color: #ffffff;
+    min-height: 100vh;
 }
-
-.container {
-    width: 94%;
-    max-width: 1100px;
-    margin: auto;
-}
-
-/* CABEÇALHO */
 
 header {
-    background: linear-gradient(180deg, #111820, #080b0e);
-    border-bottom: 1px solid #26333d;
-    padding: 22px 15px;
-    text-align: center;
+    background: linear-gradient(180deg, #111820, #0d1117);
+    border-bottom: 1px solid #1d2730;
+    padding: 18px 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 23px;
+.topo {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
 }
 
-header p {
-    margin: 7px 0 0;
-    color: #8b9aa5;
-    font-size: 13px;
-}
-
-/* STATUS */
-
-.status {
-    margin-top: 18px;
-    padding: 14px;
-    background: #0e1419;
-    border: 1px solid #26333d;
-    border-radius: 12px;
-
+.logo {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.led {
-    width: 12px;
-    height: 12px;
+.logo-icon {
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background: #777;
+    background: #1db954;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 21px;
 }
 
-.status.online .led {
-    background: #22c55e;
-    box-shadow: 0 0 12px #22c55e;
+.logo-text h1 {
+    font-size: 18px;
 }
 
-.status.offline .led {
-    background: #ef4444;
-    box-shadow: 0 0 12px #ef4444;
-}
-
-#horaAtualizacao {
-    margin-left: auto;
-    color: #71808b;
+.logo-text p {
+    color: #8b949e;
     font-size: 12px;
+    margin-top: 3px;
 }
 
-/* CARDS */
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 14px;
+.relogio {
+    text-align: right;
 }
 
-.card {
-    background: #0e1419;
-    border: 1px solid #26333d;
-    border-radius: 14px;
-    padding: 18px;
+.relogio strong {
+    display: block;
+    color: #1db954;
+    font-size: 18px;
 }
 
-.card .titulo {
-    color: #83929d;
-    font-size: 12px;
-    text-transform: uppercase;
-}
-
-.card .numero {
-    margin-top: 10px;
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.card .descricao {
-    margin-top: 6px;
-    color: #667681;
+.relogio span {
+    color: #8b949e;
     font-size: 11px;
 }
 
-/* PAINÉIS */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px 15px 120px;
+}
 
-.painel {
-    margin-top: 14px;
-    background: #0e1419;
-    border: 1px solid #26333d;
+.status-topo {
+    background: #111820;
+    border: 1px solid #1d2730;
     border-radius: 14px;
-    padding: 18px;
-}
-
-.painel h2 {
-    margin: 0 0 15px;
-    font-size: 16px;
-}
-
-/* INFORMAÇÕES */
-
-.informacoes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    padding: 12px 15px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
 }
 
-.info {
-    background: #090e12;
-    border-radius: 9px;
-    padding: 12px;
+.status-online {
+    color: #1db954;
+    font-weight: bold;
 }
 
-.info strong {
-    display: block;
-    color: #788893;
-    font-size: 11px;
-    margin-bottom: 5px;
-}
-
-.info span {
+.status-texto {
+    color: #8b949e;
     font-size: 13px;
 }
 
-/* GRÁFICO */
+.hero {
+    background: linear-gradient(145deg, #152019, #10161d);
+    border: 1px solid #24352a;
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-#grafico {
-    width: 100%;
-    height: 250px;
+.hero .icone {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.hero h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #aab3bd;
+    line-height: 1.6;
+}
+
+.indicadores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.indicador {
+    background: #111820;
+    border: 1px solid #1d2730;
+    border-radius: 14px;
+    padding: 18px 12px;
+    text-align: center;
+}
+
+.indicador .numero {
     display: block;
-    background: #090d11;
-    border: 1px solid #1c2830;
-    border-radius: 10px;
+    color: #1db954;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
-/* LOG */
+.indicador .titulo {
+    font-size: 13px;
+    font-weight: bold;
+}
 
-#logAudiencia {
-    height: 230px;
-    overflow-y: auto;
-    background: #090d11;
-    border: 1px solid #1c2830;
-    border-radius: 10px;
-    padding: 10px;
-    font-family: Consolas, monospace;
+.indicador small {
+    display: block;
+    color: #737d87;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.secao {
+    background: #111820;
+    border: 1px solid #1d2730;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.secao h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.secao h2 span {
+    color: #1db954;
+}
+
+.programacao {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.programa {
+    background: #0d1117;
+    border: 1px solid #1d2730;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.programa .hora {
+    color: #1db954;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.programa h3 {
+    margin: 7px 0;
+    font-size: 16px;
+}
+
+.programa p {
+    color: #8b949e;
     font-size: 12px;
+    line-height: 1.5;
 }
 
-.log {
-    padding: 8px;
-    border-bottom: 1px solid #172128;
+.programa small {
+    color: #6e7681;
+    display: block;
+    margin-top: 8px;
 }
 
-.log.entrada {
-    color: #5ee58a;
-}
-
-.log.saida {
-    color: #ff8888;
-}
-
-.log.info {
-    color: #9aa9b3;
-}
-
-/* BOTÕES */
-
-.botoes {
-    margin-top: 14px;
+.admin-titulo {
     display: flex;
-    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
-button {
-    background: #151e25;
-    border: 1px solid #34434f;
-    color: #e8edf1;
-    padding: 10px 14px;
-    border-radius: 9px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #1c2830;
-}
-
-/* ERRO */
-
-.erro {
-    display: none;
-    margin-top: 12px;
-    background: #321619;
-    border: 1px solid #72282f;
-    color: #ffb5b5;
-    border-radius: 9px;
-    padding: 12px;
-    font-size: 12px;
-}
-
-/* RODAPÉ */
-
-footer {
-    text-align: center;
-    padding: 25px 10px;
-    color: #586771;
+.badge {
+    background: #18251d;
+    color: #1db954;
+    border: 1px solid #245c38;
+    border-radius: 20px;
+    padding: 6px 10px;
     font-size: 11px;
 }
 
-/* CELULAR */
-
-@media (max-width: 800px) {
-
-    .cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .informacoes {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.grafico-container {
+    background: #0d1117;
+    border: 1px solid #1d2730;
+    border-radius: 12px;
+    padding: 12px;
+    overflow: hidden;
 }
 
-@media (max-width: 500px) {
+#grafico {
+    display: block;
+    width: 100%;
+    height: 240px;
+}
 
-    header h1 {
-        font-size: 19px;
-    }
+.log {
+    background: #0d1117;
+    border: 1px solid #1d2730;
+    border-radius: 12px;
+    padding: 12px;
+    max-height: 260px;
+    overflow-y: auto;
+}
 
-    .cards {
+.log-vazio {
+    color: #6e7681;
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+}
+
+.log div {
+    border-bottom: 1px solid #1d2730;
+    padding: 9px 5px;
+    font-size: 12px;
+    color: #c9d1d9;
+}
+
+.log div:last-child {
+    border-bottom: 0;
+}
+
+.dados {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.dado {
+    background: #0d1117;
+    border: 1px solid #1d2730;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.dado span {
+    display: block;
+    color: #737d87;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.dado strong {
+    color: #e6edf3;
+    font-size: 13px;
+    word-break: break-word;
+}
+
+.diagnostico {
+    margin-top: 15px;
+    padding: 14px;
+    background: #0d1117;
+    border: 1px solid #1d2730;
+    border-radius: 10px;
+}
+
+.diagnostico h3 {
+    color: #1db954;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+#erroIcecast {
+    color: #ff6b6b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.botoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+button {
+    border: 0;
+    border-radius: 9px;
+    padding: 11px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #1db954;
+    color: #000;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+button.secundario {
+    background: #202830;
+    color: #fff;
+    border: 1px solid #303b45;
+}
+
+.navegacao {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.navegacao button {
+    background: #151c23;
+    color: #dce3e8;
+    border: 1px solid #28323b;
+}
+
+.navegacao button:hover {
+    border-color: #1db954;
+    color: #1db954;
+}
+
+.rodape {
+    text-align: center;
+    color: #606a74;
+    font-size: 11px;
+    padding: 20px;
+}
+
+.player-existente {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    background: rgba(13,17,23,.97);
+    border-top: 1px solid #26313a;
+    padding: 10px 15px;
+}
+
+.player-interno {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.player-info {
+    min-width: 0;
+}
+
+.player-info strong {
+    display: block;
+    font-size: 13px;
+}
+
+.player-info span {
+    display: block;
+    color: #1db954;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+#statusPlayer {
+    color: #8b949e;
+    font-size: 11px;
+}
+
+@media (max-width: 700px) {
+
+    .indicadores {
         grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
     }
 
-    .card {
-        padding: 13px;
-    }
-
-    .card .numero {
-        font-size: 27px;
-    }
-
-    .informacoes {
+    .programacao {
         grid-template-columns: 1fr;
     }
 
-    #horaAtualizacao {
+    .dados {
+        grid-template-columns: 1fr;
+    }
+
+    .topo {
+        align-items: flex-start;
+    }
+
+    .relogio {
         display: none;
+    }
+
+    .hero h2 {
+        font-size: 23px;
+    }
+
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .indicador .numero {
+        font-size: 24px;
+    }
+
+    .secao {
+        padding: 15px;
+    }
+
+    #grafico {
+        height: 200px;
     }
 }
 </style>
@@ -1246,244 +1438,317 @@ footer {
 <body>
 
 <header>
+    <div class="topo">
 
-    <h1>📻 Rádio Palavra Inspirando Vida</h1>
+        <div class="logo">
+            <div class="logo-icon">📻</div>
 
-    <p>
-        Painel Analítico em Tempo Real — Icecast
-    </p>
+            <div class="logo-text">
+                <h1>Rádio Palavra Inspirando Vida</h1>
+                <p>WEB · 24h no ar</p>
+            </div>
+        </div>
 
+        <div class="relogio">
+            <strong id="hora">00:00:00</strong>
+            <span id="data">--/--/----</span>
+        </div>
+
+    </div>
 </header>
 
+<main class="container">
 
-<div class="container">
+    <div class="status-topo">
 
-    <!-- STATUS -->
+        <div>
+            <strong class="status-online">🟢 Ao Vivo</strong>
+            <div class="status-texto">Música Gospel 24h</div>
+        </div>
 
-    <div id="status" class="status offline">
-
-        <div class="led"></div>
-
-        <strong id="statusTexto">
-            Verificando Icecast...
-        </strong>
-
-        <span id="horaAtualizacao">
-            —
-        </span>
+        <div>🔊</div>
 
     </div>
 
+    <section class="hero">
 
-    <!-- CARDS -->
+        <div class="icone">🔊</div>
 
-    <div class="cards">
+        <h2>A Palavra que<br>Transforma Vidas</h2>
 
-        <div class="card">
+        <p>
+            Louvores, adoração e mensagens bíblicas
+            que fortalecem sua fé todos os dias.
+        </p>
 
-            <div class="titulo">
-                Ouvintes agora
+    </section>
+
+    <section class="indicadores">
+
+        <div class="indicador">
+            <span class="numero">24h</span>
+            <span class="titulo">No ar</span>
+            <small>Transmissão contínua</small>
+        </div>
+
+        <div class="indicador">
+            <span class="numero" id="ouvintes">—</span>
+            <span class="titulo">Ouvindo</span>
+            <small>ouvintes simultâneos</small>
+        </div>
+
+        <div class="indicador">
+            <span class="numero">3</span>
+            <span class="titulo">Programas</span>
+            <small>faixas principais</small>
+        </div>
+
+        <div class="indicador">
+            <span class="numero">Ao Vivo</span>
+            <span class="titulo">Tocando agora</span>
+            <small>Transmissão ao vivo</small>
+        </div>
+
+    </section>
+
+    <section class="secao">
+
+        <h2>📻 Tocando agora</h2>
+
+        <div class="programa">
+
+            <div class="hora">TRANSMISSÃO AO VIVO</div>
+
+            <h3>Rádio Palavra Inspirando Vida - WEB</h3>
+
+            <p>Gospel 24h</p>
+
+            <small>🔴 Transmitindo</small>
+
+        </div>
+
+    </section>
+
+    <section class="secao">
+
+        <h2>📖 Sobre a rádio</h2>
+
+        <div class="programacao">
+
+            <div class="programa">
+                <div class="hora">00h – 08h</div>
+                <h3>Clássicos Evangélicos</h3>
+                <p>Hinários e pioneiros do gospel brasileiro.</p>
+                <small>Noturno</small>
             </div>
 
-            <div id="ouvintes" class="numero">
-                —
+            <div class="programa">
+                <div class="hora">08h – 13h</div>
+                <h3>Era de Ouro Gospel</h3>
+                <p>Os maiores sucessos de 2000 a 2015.</p>
+                <small>Manhã</small>
             </div>
 
-            <div class="descricao">
-                ouvintes simultâneos
+            <div class="programa">
+                <div class="hora">13h – 19h</div>
+                <h3>Hits & Lançamentos</h3>
+                <p>Novidades e músicas mais tocadas do momento.</p>
+                <small>Tarde</small>
+            </div>
+
+            <div class="programa">
+                <div class="hora">19h – 00h</div>
+                <h3>Programação Gospel</h3>
+                <p>Mix especial com os melhores do dia.</p>
+                <small>Noite</small>
             </div>
 
         </div>
 
+    </section>
 
-        <div class="card">
+    <section class="secao">
 
-            <div class="titulo">
-                Pico
+        <div class="admin-titulo">
+
+            <div>
+                <h2>📊 Painel Analítico em Tempo Real — Icecast</h2>
             </div>
 
-            <div id="pico" class="numero">
-                —
-            </div>
-
-            <div class="descricao">
-                maior pico informado pelo Icecast
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="titulo">
-                Conexões
-            </div>
-
-            <div id="conexoes" class="numero">
-                —
-            </div>
-
-            <div class="descricao">
-                listener_connections
+            <div class="badge" id="status">
+                🔄 CONSULTANDO ICECAST
             </div>
 
         </div>
 
+        <div class="indicadores">
 
-        <div class="card">
-
-            <div class="titulo">
-                Sessões
+            <div class="indicador">
+                <span class="numero" id="ouvintesPainel">—</span>
+                <span class="titulo">Ouvintes agora</span>
+                <small>ouvintes simultâneos</small>
             </div>
 
-            <div id="sessoes" class="numero">
-                0
+            <div class="indicador">
+                <span class="numero" id="pico">—</span>
+                <span class="titulo">Pico</span>
+                <small>maior pico informado pelo Icecast</small>
             </div>
 
-            <div class="descricao">
-                entradas detectadas pelo painel
+            <div class="indicador">
+                <span class="numero" id="conexoes">—</span>
+                <span class="titulo">Conexões</span>
+                <small>listener_connections</small>
             </div>
 
-        </div>
-
-    </div>
-
-
-    <!-- GRÁFICO -->
-
-    <div class="painel">
-
-        <h2>
-            📈 Audiência em tempo real
-        </h2>
-
-        <canvas
-            id="grafico"
-            width="1000"
-            height="250">
-        </canvas>
-
-    </div>
-
-
-    <!-- LOG -->
-
-    <div class="painel">
-
-        <h2>
-            📋 Log de audiência
-        </h2>
-
-        <div id="logAudiencia"></div>
-
-    </div>
-
-
-    <!-- DADOS ICECAST -->
-
-    <div class="painel">
-
-        <h2>
-            📡 Dados reais do Icecast
-        </h2>
-
-        <div class="informacoes">
-
-            <div class="info">
-                <strong>Mount Point</strong>
-                <span id="mount">/stream</span>
-            </div>
-
-            <div class="info">
-                <strong>Bitrate</strong>
-                <span id="bitrate">—</span>
-            </div>
-
-            <div class="info">
-                <strong>Formato</strong>
-                <span id="formato">—</span>
-            </div>
-
-            <div class="info">
-                <strong>Gênero</strong>
-                <span id="genero">—</span>
-            </div>
-
-            <div class="info">
-                <strong>Servidor</strong>
-                <span id="servidor">—</span>
-            </div>
-
-            <div class="info">
-                <strong>Fonte</strong>
-                <span id="fonte">—</span>
-            </div>
-
-            <div class="info">
-                <strong>Sample Rate</strong>
-                <span id="sampleRate">—</span>
-            </div>
-
-            <div class="info">
-                <strong>Canais</strong>
-                <span id="canais">—</span>
-            </div>
-
-            <div class="info">
-                <strong>Início do Stream</strong>
-                <span id="inicioStream">—</span>
+            <div class="indicador">
+                <span class="numero" id="entradas">0</span>
+                <span class="titulo">Entradas</span>
+                <small>detectadas pelo painel</small>
             </div>
 
         </div>
 
-    </div>
+    </section>
 
+    <section class="secao">
 
-    <!-- DIAGNÓSTICO -->
+        <h2>📈 Audiência em tempo real</h2>
 
-    <div class="painel">
+        <div class="grafico-container">
+            <canvas id="grafico" width="900" height="240"></canvas>
+        </div>
 
-        <h2>
-            🔎 Diagnóstico
-        </h2>
+    </section>
 
-        <div class="informacoes">
+    <section class="secao">
 
-            <div class="info">
-                <strong>Client Connections</strong>
-                <span id="clientConnections">—</span>
-            </div>
+        <div class="admin-titulo">
 
-            <div class="info">
-                <strong>File Connections</strong>
-                <span id="fileConnections">—</span>
-            </div>
+            <h2>📋 Log de audiência</h2>
 
-            <div class="info">
-                <strong>Source Connections</strong>
-                <span id="sourceConnections">—</span>
-            </div>
+            <button
+                class="secundario"
+                onclick="limparLog()">
+                🗑️ Limpar log
+            </button>
 
-            <div class="info">
-                <strong>Total Bytes Sent</strong>
-                <span id="bytesSent">—</span>
-            </div>
+        </div>
 
-            <div class="info">
-                <strong>Total Bytes Read</strong>
-                <span id="bytesRead">—</span>
-            </div>
+        <div
+            class="log"
+            id="logAudiencia">
 
-            <div class="info">
-                <strong>Tempo da consulta</strong>
-                <span id="tempoConsulta">—</span>
+            <div class="log-vazio">
+                Aguardando movimentação de ouvintes...
             </div>
 
         </div>
 
+    </section>
 
-        <div id="erro" class="erro"></div>
+    <section class="secao">
 
+        <h2>📡 Dados reais do Icecast</h2>
+
+        <div class="dados">
+
+            <div class="dado">
+                <span>Mount Point</span>
+                <strong id="mount">/stream</strong>
+            </div>
+
+            <div class="dado">
+                <span>Bitrate</span>
+                <strong id="bitrate">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Formato</span>
+                <strong id="formato">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Gênero</span>
+                <strong id="genero">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Servidor</span>
+                <strong id="servidor">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Fonte</span>
+                <strong id="fonte">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Sample Rate</span>
+                <strong id="samplerate">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Canais</span>
+                <strong id="canais">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Início do Stream</span>
+                <strong id="inicioStream">—</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="secao">
+
+        <h2>🔎 Diagnóstico</h2>
+
+        <div class="dados">
+
+            <div class="dado">
+                <span>Client Connections</span>
+                <strong id="clientConnections">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>File Connections</span>
+                <strong id="fileConnections">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Source Connections</span>
+                <strong id="sourceConnections">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Total Bytes Sent</span>
+                <strong id="bytesSent">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Total Bytes Read</span>
+                <strong id="bytesRead">—</strong>
+            </div>
+
+            <div class="dado">
+                <span>Tempo da consulta</span>
+                <strong id="consulta">—</strong>
+            </div>
+
+        </div>
+
+        <div class="diagnostico">
+
+            <h3>Resultado da consulta</h3>
+
+            <div id="erroIcecast">
+                Aguardando consulta ao Icecast...
+            </div>
+
+        </div>
 
         <div class="botoes">
 
@@ -1491,124 +1756,216 @@ footer {
                 🔄 Atualizar agora
             </button>
 
-            <button onclick="limparLog()">
-                🗑️ Limpar log
+            <button
+                class="secundario"
+                onclick="testarStatus()">
+                🔎 Testar status-json.xsl
             </button>
 
+        </div>
+
+    </section>
+
+    <section class="secao">
+
+        <h2>📅 Programação</h2>
+
+        <div class="programacao">
+
+            <div class="programa">
+                <div class="hora">00:00 – 08:00</div>
+                <h3>Clássicos Evangélicos</h3>
+                <p>Hinários e pioneiros do gospel brasileiro.</p>
+                <small>Noturno</small>
+            </div>
+
+            <div class="programa">
+                <div class="hora">08:00 – 13:00</div>
+                <h3>Era de Ouro Gospel</h3>
+                <p>Os maiores sucessos de 2000 a 2015.</p>
+                <small>Manhã</small>
+            </div>
+
+            <div class="programa">
+                <div class="hora">13:00 – 19:00</div>
+                <h3>Hits & Lançamentos</h3>
+                <p>Novidades e músicas mais tocadas do momento.</p>
+                <small>Tarde</small>
+            </div>
+
+            <div class="programa">
+                <div class="hora">19:00 – 00:00</div>
+                <h3>Programação Gospel</h3>
+                <p>Mix especial com os melhores do dia.</p>
+                <small>Noite</small>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="navegacao">
+
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})">
+            🏠 Rádio
+        </button>
+
+        <button onclick="document.getElementById('painel').scrollIntoView({behavior:'smooth'})">
+            📊 Analítico
+        </button>
+
+        <button onclick="alert('Área de pedidos disponível no sistema da rádio.')">
+            🎵 Pedir Música
+        </button>
+
+    </div>
+
+</main>
+
+<footer class="rodape">
+    Rádio Palavra Inspirando Vida — Monitoramento Icecast
+</footer>
+
+<!--
+    IMPORTANTE:
+    NÃO FOI CRIADO UM NOVO PLAYER DE ÁUDIO AQUI.
+
+    O SEU PLAYER EXISTENTE CONTINUA SENDO RESPONSÁVEL
+    PELO STREAM:
+
+    https://python-surgeon-omissions-conditioning.trycloudflare.com/stream
+-->
+
+<div class="player-existente">
+
+    <div class="player-interno">
+
+        <div class="player-info">
+
+            <strong>📻 Rádio Palavra Inspirando Vida</strong>
+
+            <span id="statusPlayer">
+                🔴 Ao Vivo · Transmitindo
+            </span>
+
+        </div>
+
+        <div>
+            <span style="font-size:12px;color:#1db954;">
+                24h
+            </span>
         </div>
 
     </div>
 
 </div>
 
-
-<footer>
-
-    Rádio Palavra Inspirando Vida — Monitoramento Icecast
-
-</footer>
-
-
 <script>
 
-/*
-====================================================
- CONFIGURAÇÃO
-====================================================
-*/
+/* =========================================================
+   CONFIGURAÇÃO ICECAST
+   ========================================================= */
 
 const ICECAST_STATS =
-"https://python-surgeon-omissions-conditioning.trycloudflare.com/status-json.xsl";
+    "https://python-surgeon-omissions-conditioning.trycloudflare.com/status-json.xsl";
 
-const MOUNT =
-"/stream";
-
-const INTERVALO =
-10000;
+const ICECAST_STREAM =
+    "https://python-surgeon-omissions-conditioning.trycloudflare.com/stream";
 
 
-/*
-====================================================
- VARIÁVEIS
-====================================================
-*/
+/* =========================================================
+   VARIÁVEIS DO PAINEL
+   ========================================================= */
 
 let ouvintesAnterior = null;
 
-let picoLocal = 0;
-
-let sessoes = Number(
-    localStorage.getItem(
-        "radio_sessoes"
-    ) || 0
-);
+let picoReal = 0;
 
 let historico = [];
 
 let logAudiencia = [];
 
+let totalEntradas = 0;
 
-/*
-====================================================
- BUSCAR ICECAST
-====================================================
-*/
+
+/* =========================================================
+   RELÓGIO
+   ========================================================= */
+
+function atualizarRelogio() {
+
+    const agora = new Date();
+
+    document.getElementById("hora").textContent =
+        agora.toLocaleTimeString("pt-BR");
+
+    document.getElementById("data").textContent =
+        agora.toLocaleDateString(
+            "pt-BR",
+            {
+                weekday: "short",
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }
+        );
+}
+
+atualizarRelogio();
+
+setInterval(
+    atualizarRelogio,
+    1000
+);
+
+
+/* =========================================================
+   CONSULTAR ICECAST
+   ========================================================= */
 
 async function buscarIcecast() {
 
-    const inicio =
-        performance.now();
-
-    const resposta =
-        await fetch(
-            ICECAST_STATS +
-            "?tempo=" +
-            Date.now(),
-            {
-                cache: "no-store"
-            }
-        );
-
-    const tempo =
-        Math.round(
-            performance.now() -
-            inicio
-        );
-
-    document.getElementById(
-        "tempoConsulta"
-    ).textContent =
-        tempo + " ms";
-
+    const resposta = await fetch(
+        ICECAST_STATS +
+        "?t=" +
+        Date.now(),
+        {
+            method: "GET",
+            cache: "no-store",
+            mode: "cors"
+        }
+    );
 
     if (!resposta.ok) {
 
         throw new Error(
-            "HTTP " +
+            "Icecast HTTP " +
             resposta.status
         );
     }
 
-
-    const dados =
+    const json =
         await resposta.json();
 
-
-    if (!dados.icestats) {
+    if (!json.icestats) {
 
         throw new Error(
-            "Icecast não retornou icestats."
+            "Resposta do Icecast inválida"
         );
     }
 
+    const root =
+        json.icestats;
 
     let source =
-        dados.icestats.source;
-
+        root.source;
 
     /*
-       Icecast pode retornar objeto
-       ou array.
+       Quando existe apenas uma fonte,
+       Icecast normalmente devolve objeto.
+
+       Quando existem várias fontes,
+       pode devolver array.
     */
 
     if (Array.isArray(source)) {
@@ -1616,234 +1973,213 @@ async function buscarIcecast() {
         source =
             source.find(
                 item =>
-                    item.mount === MOUNT
+                    item.mount === "/stream"
             );
     }
-
 
     if (!source) {
 
         throw new Error(
-            "Mount /stream não encontrado."
+            "Mount /stream não encontrado"
         );
     }
 
-
-    return source;
+    return {
+        root: root,
+        source: source
+    };
 }
 
 
-/*
-====================================================
- ATUALIZAR DADOS
-====================================================
-*/
+/* =========================================================
+   ATUALIZAÇÃO PRINCIPAL
+   ========================================================= */
 
 async function atualizarRadio() {
 
     const erro =
         document.getElementById(
-            "erro"
+            "erroIcecast"
         );
 
-    erro.style.display =
-        "none";
-
-
     try {
+
+        erro.textContent =
+            "Consultando Icecast...";
 
         const dados =
             await buscarIcecast();
 
+        const root =
+            dados.root;
+
+        const source =
+            dados.source;
+
+
+        /* -------------------------
+           OUVINTES
+        ------------------------- */
 
         const ouvintes =
-            Number(
-                dados.listeners
-            ) || 0;
-
-
-        /*
-        OUVINTES
-        */
+            Number(source.listeners) || 0;
 
         document.getElementById(
             "ouvintes"
         ).textContent =
             ouvintes;
 
+        document.getElementById(
+            "ouvintesPainel"
+        ).textContent =
+            ouvintes;
 
-        /*
-        PICO
-        */
+
+        /* -------------------------
+           PICO
+        ------------------------- */
 
         const picoIcecast =
             Number(
-                dados.listener_peak
+                source.listener_peak
             ) || 0;
 
-
-        picoLocal =
+        picoReal =
             Math.max(
-                picoLocal,
+                picoReal,
                 picoIcecast
             );
-
 
         document.getElementById(
             "pico"
         ).textContent =
-            picoLocal;
+            picoReal;
 
 
-        /*
-        CONEXÕES
-        */
+        /* -------------------------
+           CONEXÕES DE OUVINTES
+        ------------------------- */
 
         document.getElementById(
             "conexoes"
         ).textContent =
             Number(
-                dados.listener_connections
+                source.listener_connections
             ) || 0;
 
 
-        /*
-        SESSÕES
-        */
+        /* -------------------------
+           ENTRADAS / SAÍDAS
+        ------------------------- */
 
         if (
-            ouvintesAnterior !== null &&
-            ouvintes > ouvintesAnterior
+            ouvintesAnterior !== null
         ) {
 
-            const entrada =
-                ouvintes -
-                ouvintesAnterior;
+            if (
+                ouvintes >
+                ouvintesAnterior
+            ) {
 
-            sessoes += entrada;
+                const entradas =
+                    ouvintes -
+                    ouvintesAnterior;
 
-            localStorage.setItem(
-                "radio_sessoes",
-                sessoes
-            );
+                totalEntradas +=
+                    entradas;
 
-            registrarLog(
-                "ENTRADA +" +
-                entrada,
-                ouvintes,
-                "entrada"
-            );
+                document.getElementById(
+                    "entradas"
+                ).textContent =
+                    totalEntradas;
+
+                registrar(
+                    "ENTRADA +" +
+                    entradas,
+                    ouvintes
+                );
+            }
+
+
+            if (
+                ouvintes <
+                ouvintesAnterior
+            ) {
+
+                const saidas =
+                    ouvintesAnterior -
+                    ouvintes;
+
+                registrar(
+                    "SAÍDA -" +
+                    saidas,
+                    ouvintes
+                );
+            }
         }
-
-
-        if (
-            ouvintesAnterior !== null &&
-            ouvintes < ouvintesAnterior
-        ) {
-
-            const saida =
-                ouvintesAnterior -
-                ouvintes;
-
-            registrarLog(
-                "SAÍDA -" +
-                saida,
-                ouvintes,
-                "saida"
-            );
-        }
-
-
-        document.getElementById(
-            "sessoes"
-        ).textContent =
-            sessoes;
 
 
         ouvintesAnterior =
             ouvintes;
 
 
-        /*
-        HISTÓRICO
-        */
-
-        historico.push({
-
-            horario:
-                new Date(),
-
-            ouvintes:
-                ouvintes
-
-        });
-
-
-        if (
-            historico.length >
-            120
-        ) {
-
-            historico.shift();
-        }
-
-
-        desenharGrafico();
-
-
-        /*
-        DADOS DA TRANSMISSÃO
-        */
+        /* -------------------------
+           DADOS DO STREAM
+        ------------------------- */
 
         document.getElementById(
             "mount"
         ).textContent =
-            dados.mount ||
-            MOUNT;
+            source.mount ||
+            "/stream";
 
+
+        const bitrate =
+            source.bitrate ||
+            source["ice-bitrate"] ||
+            "—";
 
         document.getElementById(
             "bitrate"
         ).textContent =
-            dados.bitrate
-                ? dados.bitrate +
-                  " kbps"
-                : "128 kbps";
+            bitrate === "—"
+                ? "—"
+                : bitrate + " kbps";
 
 
         document.getElementById(
             "formato"
         ).textContent =
-            dados.server_type ||
-            "audio/mpeg";
+            source.server_type ||
+            "—";
 
 
         document.getElementById(
             "genero"
         ).textContent =
-            dados.genre ||
+            source.genre ||
             "—";
 
 
         document.getElementById(
             "servidor"
         ).textContent =
-            dados.server_name ||
+            source.server_name ||
             "—";
 
 
         document.getElementById(
             "fonte"
         ).textContent =
-            dados.user_agent ||
+            source.user_agent ||
             "—";
 
 
         document.getElementById(
-            "sampleRate"
+            "samplerate"
         ).textContent =
-            dados["ice-samplerate"]
-                ? dados["ice-samplerate"] +
+            source["ice-samplerate"]
+                ? source["ice-samplerate"] +
                   " Hz"
                 : "—";
 
@@ -1851,39 +2187,39 @@ async function atualizarRadio() {
         document.getElementById(
             "canais"
         ).textContent =
-            dados["ice-channels"] ||
+            source["ice-channels"] ||
             "—";
 
 
         document.getElementById(
             "inicioStream"
         ).textContent =
-            dados.stream_start ||
+            source.stream_start ||
             "—";
 
 
-        /*
-        DIAGNÓSTICO
-        */
+        /* -------------------------
+           DIAGNÓSTICO DO SERVIDOR
+        ------------------------- */
 
         document.getElementById(
             "clientConnections"
         ).textContent =
-            dados.client_connections ||
+            root.client_connections ||
             0;
 
 
         document.getElementById(
             "fileConnections"
         ).textContent =
-            dados.file_connections ||
+            root.file_connections ||
             0;
 
 
         document.getElementById(
             "sourceConnections"
         ).textContent =
-            dados.source_client_connections ||
+            root.source_total_connections ||
             0;
 
 
@@ -1891,7 +2227,8 @@ async function atualizarRadio() {
             "bytesSent"
         ).textContent =
             formatarBytes(
-                dados.total_bytes_sent
+                source.total_bytes_sent ||
+                0
             );
 
 
@@ -1899,99 +2236,115 @@ async function atualizarRadio() {
             "bytesRead"
         ).textContent =
             formatarBytes(
-                dados.total_bytes_read
+                source.total_bytes_read ||
+                0
             );
 
 
-        /*
-        STATUS
-        */
-
         document.getElementById(
-            "status"
-        ).className =
-            "status online";
-
-
-        document.getElementById(
-            "statusTexto"
+            "consulta"
         ).textContent =
-            "🟢 RÁDIO ONLINE — ICECAST RESPONDENDO";
-
-
-        document.getElementById(
-            "horaAtualizacao"
-        ).textContent =
-            "Atualizado " +
-            new Date()
-            .toLocaleTimeString(
+            new Date().toLocaleTimeString(
                 "pt-BR"
             );
 
 
-    } catch (e) {
+        /* -------------------------
+           STATUS
+        ------------------------- */
 
-        console.error(e);
+        document.getElementById(
+            "status"
+        ).textContent =
+            "🟢 RÁDIO ONLINE";
+
+
+        document.getElementById(
+            "statusPlayer"
+        ).textContent =
+            "🔴 Ao Vivo · Transmitindo";
+
+
+        erro.style.color =
+            "#1db954";
+
+        erro.textContent =
+            "✓ Icecast consultado com sucesso. " +
+            "Dados reais recebidos do servidor.";
+
+
+        /* -------------------------
+           GRÁFICO
+        ------------------------- */
+
+        adicionarGrafico(
+            ouvintes
+        );
+
+    } catch (erroAtual) {
+
+        console.error(
+            "Erro Icecast:",
+            erroAtual
+        );
 
 
         document.getElementById(
             "status"
-        ).className =
-            "status offline";
-
-
-        document.getElementById(
-            "statusTexto"
         ).textContent =
-            "🔴 NÃO FOI POSSÍVEL CONSULTAR O ICECAST";
+            "🔴 ICECAST INDISPONÍVEL";
 
 
-        erro.style.display =
-            "block";
+        erro.style.color =
+            "#ff6b6b";
 
 
         erro.textContent =
             "Erro: " +
-            e.message +
-            ". Verifique o CORS e o endereço /status-json.xsl.";
+            erroAtual.message +
+            ". Verifique CORS e o endereço /status-json.xsl.";
+
+
+        /*
+           IMPORTANTE:
+
+           Não zeramos os números anteriores.
+
+           Se o Icecast estiver temporariamente
+           inacessível, o último valor conhecido
+           permanece na tela.
+        */
     }
 }
 
 
-/*
-====================================================
- LOG
-====================================================
-*/
+/* =========================================================
+   REGISTRAR ENTRADA / SAÍDA
+   ========================================================= */
 
-function registrarLog(
+function registrar(
     tipo,
-    ouvintes,
-    classe
+    ouvintes
 ) {
 
-    const horario =
-        new Date()
-        .toLocaleTimeString(
+    const agora =
+        new Date().toLocaleTimeString(
             "pt-BR"
         );
 
+    const registro = {
 
-    logAudiencia.unshift({
+        horario: agora,
 
-        horario:
-            horario,
+        tipo: tipo,
 
-        tipo:
-            tipo,
+        ouvintes: ouvintes
+    };
 
-        ouvintes:
-            ouvintes,
 
-        classe:
-            classe
-
-    });
+    logAudiencia.push(
+        registro
+    );
 
 
     if (
@@ -1999,63 +2352,100 @@ function registrarLog(
         200
     ) {
 
-        logAudiencia.pop();
+        logAudiencia.shift();
     }
 
 
-    desenharLog();
+    renderizarLog();
 }
 
 
-function desenharLog() {
+/* =========================================================
+   MOSTRAR LOG
+   ========================================================= */
 
-    const elemento =
+function renderizarLog() {
+
+    const log =
         document.getElementById(
             "logAudiencia"
         );
 
-
-    elemento.innerHTML =
-        "";
+    if (!log) return;
 
 
-    logAudiencia.forEach(
-        item => {
+    if (
+        logAudiencia.length === 0
+    ) {
 
-            const linha =
-                document.createElement(
-                    "div"
+        log.innerHTML =
+            '<div class="log-vazio">' +
+            'Aguardando movimentação de ouvintes...' +
+            '</div>';
+
+        return;
+    }
+
+
+    log.innerHTML = "";
+
+
+    [...logAudiencia]
+        .reverse()
+        .forEach(
+            item => {
+
+                const linha =
+                    document.createElement(
+                        "div"
+                    );
+
+                linha.textContent =
+                    item.horario +
+                    " — " +
+                    item.tipo +
+                    " — " +
+                    item.ouvintes +
+                    " ouvinte(s)";
+
+                log.appendChild(
+                    linha
                 );
-
-
-            linha.className =
-                "log " +
-                item.classe;
-
-
-            linha.textContent =
-                item.horario +
-                " — " +
-                item.tipo +
-                " — " +
-                item.ouvintes +
-                " ouvinte(s)";
-
-
-            elemento.appendChild(
-                linha
-            );
-
-        }
-    );
+            }
+        );
 }
 
 
-/*
-====================================================
- GRÁFICO
-====================================================
-*/
+/* =========================================================
+   GRÁFICO
+   ========================================================= */
+
+function adicionarGrafico(
+    ouvintes
+) {
+
+    historico.push({
+
+        horario:
+            Date.now(),
+
+        ouvintes:
+            ouvintes
+    });
+
+
+    if (
+        historico.length >
+        120
+    ) {
+
+        historico.shift();
+    }
+
+
+    desenharGrafico();
+}
+
 
 function desenharGrafico() {
 
@@ -2064,6 +2454,8 @@ function desenharGrafico() {
             "grafico"
         );
 
+    if (!canvas) return;
+
 
     const ctx =
         canvas.getContext(
@@ -2071,9 +2463,13 @@ function desenharGrafico() {
         );
 
 
+    /*
+       Ajusta o canvas à resolução
+       real do elemento.
+    */
+
     const largura =
         canvas.width;
-
 
     const altura =
         canvas.height;
@@ -2087,15 +2483,30 @@ function desenharGrafico() {
     );
 
 
-    /*
-       Grade
-    */
+    if (
+        historico.length === 0
+    ) {
+
+        return;
+    }
+
+
+    const maior =
+        Math.max(
+            1,
+            ...historico.map(
+                item =>
+                    item.ouvintes
+            )
+        );
+
+
+    /* LINHAS DE REFERÊNCIA */
 
     ctx.strokeStyle =
-        "#1c2730";
+        "#202830";
 
-    ctx.lineWidth =
-        1;
+    ctx.lineWidth = 1;
 
 
     for (
@@ -2105,9 +2516,8 @@ function desenharGrafico() {
     ) {
 
         const y =
-            altura / 5 *
-            i;
-
+            i *
+            (altura / 5);
 
         ctx.beginPath();
 
@@ -2125,35 +2535,7 @@ function desenharGrafico() {
     }
 
 
-    if (
-        historico.length === 0
-    ) {
-
-        ctx.fillStyle =
-            "#687781";
-
-        ctx.font =
-            "14px Arial";
-
-        ctx.fillText(
-            "Aguardando dados reais do Icecast...",
-            20,
-            30
-        );
-
-        return;
-    }
-
-
-    const maior =
-        Math.max(
-            1,
-            ...historico.map(
-                item =>
-                    item.ouvintes
-            )
-        );
-
+    /* LINHA DA AUDIÊNCIA */
 
     ctx.beginPath();
 
@@ -2163,11 +2545,15 @@ function desenharGrafico() {
 
             const x =
                 historico.length === 1
+
                 ? largura / 2
-                : indice *
-                  (largura - 20) /
-                  (historico.length - 1)
-                  + 10;
+
+                :
+
+                indice *
+                (largura - 20) /
+                (historico.length - 1)
+                + 10;
 
 
             const y =
@@ -2198,7 +2584,6 @@ function desenharGrafico() {
                     y
                 );
             }
-
         }
     );
 
@@ -2206,26 +2591,27 @@ function desenharGrafico() {
     ctx.strokeStyle =
         "#1db954";
 
-    ctx.lineWidth =
-        3;
+    ctx.lineWidth = 3;
 
     ctx.stroke();
 
 
-    /*
-       Pontos
-    */
+    /* PONTOS */
 
     historico.forEach(
         (item, indice) => {
 
             const x =
                 historico.length === 1
+
                 ? largura / 2
-                : indice *
-                  (largura - 20) /
-                  (historico.length - 1)
-                  + 10;
+
+                :
+
+                indice *
+                (largura - 20) /
+                (historico.length - 1)
+                + 10;
 
 
             const y =
@@ -2254,93 +2640,186 @@ function desenharGrafico() {
                 "#1db954";
 
             ctx.fill();
-
         }
     );
 }
 
 
-/*
-====================================================
- FORMATAR BYTES
-====================================================
-*/
+/* =========================================================
+   FORMATAR BYTES
+   ========================================================= */
 
 function formatarBytes(
     bytes
 ) {
 
-    const n =
+    bytes =
         Number(bytes) || 0;
 
 
     if (
-        n < 1024
+        bytes < 1024
     ) {
 
-        return n +
-            " B";
+        return (
+            bytes +
+            " B"
+        );
     }
 
 
     if (
-        n < 1024 * 1024
+        bytes <
+        1024 * 1024
     ) {
 
         return (
-            n / 1024
+            bytes / 1024
         ).toFixed(1) +
         " KB";
     }
 
 
     if (
-        n < 1024 * 1024 * 1024
+        bytes <
+        1024 *
+        1024 *
+        1024
     ) {
 
         return (
-            n /
-            (1024 * 1024)
+            bytes /
+            1024 /
+            1024
         ).toFixed(1) +
         " MB";
     }
 
 
     return (
-        n /
-        (1024 * 1024 * 1024)
+        bytes /
+        1024 /
+        1024 /
+        1024
     ).toFixed(2) +
     " GB";
 }
 
 
-/*
-====================================================
- LIMPAR LOG
-====================================================
-*/
+/* =========================================================
+   LIMPAR LOG
+   ========================================================= */
 
 function limparLog() {
 
-    logAudiencia =
-        [];
+    logAudiencia = [];
 
-    desenharLog();
+    renderizarLog();
 }
 
 
-/*
-====================================================
- INICIAR
-====================================================
-*/
+/* =========================================================
+   TESTAR STATUS.JSON.XSL
+   ========================================================= */
+
+async function testarStatus() {
+
+    const erro =
+        document.getElementById(
+            "erroIcecast"
+        );
+
+
+    erro.style.color =
+        "#f0c674";
+
+    erro.textContent =
+        "Testando " +
+        ICECAST_STATS +
+        " ...";
+
+
+    try {
+
+        const resposta =
+            await fetch(
+                ICECAST_STATS +
+                "?teste=" +
+                Date.now(),
+                {
+                    method: "GET",
+                    cache: "no-store",
+                    mode: "cors"
+                }
+            );
+
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "HTTP " +
+                resposta.status
+            );
+        }
+
+
+        const texto =
+            await resposta.text();
+
+
+        if (
+            !texto.includes(
+                "icestats"
+            )
+        ) {
+
+            throw new Error(
+                "O servidor respondeu, " +
+                "mas não retornou icestats."
+            );
+        }
+
+
+        erro.style.color =
+            "#1db954";
+
+        erro.textContent =
+            "✓ TESTE OK — " +
+            "status-json.xsl respondeu " +
+            "e o navegador conseguiu acessar os dados.";
+
+    } catch (e) {
+
+        erro.style.color =
+            "#ff6b6b";
+
+        erro.textContent =
+            "✕ TESTE FALHOU — " +
+            e.message +
+            ". Isso normalmente indica CORS, " +
+            "URL incorreta ou túnel indisponível.";
+    }
+}
+
+
+/* =========================================================
+   INICIAR
+   ========================================================= */
+
+renderizarLog();
 
 atualizarRadio();
 
 
+/*
+   Atualiza os dados a cada 10 segundos.
+
+   Isso é monitoramento quase em tempo real.
+*/
+
 setInterval(
     atualizarRadio,
-    INTERVALO
+    10000
 );
 
 </script>
@@ -2348,3 +2827,4 @@ setInterval(
 </body>
 </html>
 ```
+
